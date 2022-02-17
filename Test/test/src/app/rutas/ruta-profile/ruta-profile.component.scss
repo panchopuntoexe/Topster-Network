@@ -1,0 +1,74 @@
+/* {
+    border: solid red 1px
+}*/
+
+.card {
+    margin: 0 300px 0 300px;
+}
+
+.card-img, .card-img-top {
+    padding: 10px;
+}
+
+.navbar-nav-reactions {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    cursor: pointer;
+}
+
+.card-body-post {
+    flex: 1 1 auto;
+    padding-top: 0rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+.reactions-count {
+    font-size: small;
+}
+
+.post-date, .comment-date{
+    font-size: small;
+}
+
+.card-comments {
+    margin: 0px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+.card-text-comment {
+    margin-left: 3em;
+}
+
+.card-title-comment{
+    font-weight: bold;
+}
+
+.card-header-comment {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgb(0 0 0 / 10%);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.nav-link {
+    color: black;
+}
+
+
+.btn {
+    padding: 0.1rem 0.5rem;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,53 @@
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png"
+                        class="brand_logo" alt="Logo">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                <form class="form_options">
+                    <label>Usuario:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                        </div>
+                        <input type="text" name="" class="form-control input_user" value="" placeholder="Email">
+                    </div>
+                    <label>Contraseña:</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <!--<div class="input-group-text">@</div>-->
+                        </div>
+                        <input type="password" name="" class="form-control input_pass" value=""
+                            placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label" for="customControlInline">Recordarme</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <!-- RUTA AQUÍ-->
+                        <button [routerLink]="['/home']" type="button" name="button" class="btn login_btn">Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    ¿Aún no esta registrado?
+                    <!-- RUTA AQUÍ-->
+                    <a [routerLink]="['/register']" class="ml-2"> Registrarme</a>
+                </div>
+                <!-- RUTA AQUÍ
+                <div class="d-flex justify-content-center links">
+                    <a href="#">Olvidé mi contraseña</a>
+                </div>
+            -->
+            </div>
+        </div>
+    </div>
+</div>
