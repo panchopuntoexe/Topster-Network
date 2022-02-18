@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@angular/cli": "^13.2.4"
+    "@angular/cli": "^13.2.4",
+    "knex": "^1.0.3",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.2.4"
