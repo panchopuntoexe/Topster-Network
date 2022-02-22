@@ -1,6 +1,9 @@
 const Console = require("console");
 const seguimientoInterfaz = require('./Interfaces/SeguimientoInterfaz')
 const reaccionInterfaz = require('./Interfaces/ReaccionInterfaz')
+const comentarioInterfaz = require('./Interfaces/ComentarioInterfaz')
+const postInterfaz = require('./Interfaces/PostInterfaz')
+const usuarioInterfaz = require('./Interfaces/UsuarioInterfaz')
 
 const db = require('knex')({
     client: 'mysql',
@@ -12,16 +15,6 @@ const db = require('knex')({
         database : 'dbtopstersnewtwork'
     }
 });
-
-/*db.from('usuario').select("*")
-    .then((data) => {
-            console.log(data);
-    }).catch((err) => { console.log( err); throw err })
-    .finally(() => {
-        db.destroy();
-    });*/
-
-
 
 async function consultarUsuarioPorId(idUsuario){
     let retorno={};
@@ -49,6 +42,45 @@ async function consultarUsuarios(){
     return retorno
 }
 
+async function crearUsuario(usuario){
+    let retorno={};
+    await db('post').insert({ FOTO_PERFIL: usuario.fotoDePerfil,
+        NICKNAME:usuario.nickname,
+        BIOGRAFIA:usuario.biografia,
+        APELLIDOS_USUARIO:usuario.apellidos,
+        NOMBRES_USUARIO:usuario.nombres,
+        CORREO:usuario.correo,
+        CLAVE:usuario.clave,
+        FECHA_NACIMIENTO:usuario.fechaDeNacimiento,
+        GENERO:usuario.genero})
+    .then((data) => {
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+        db.destroy();
+    });
+    return retorno;
+}
+
+async function actualizarUsuario(usuario){
+    let retorno={};
+    await db('post') .where({ ID_USUARIO: usuario.idUsuario }).insert({ FOTO_PERFIL: usuario.fotoDePerfil,
+        NICKNAME:usuario.nickname,
+        BIOGRAFIA:usuario.biografia,
+        APELLIDOS_USUARIO:usuario.apellidos,
+        NOMBRES_USUARIO:usuario.nombres,
+        CORREO:usuario.correo,
+        CLAVE:usuario.clave,
+        FECHA_NACIMIENTO:usuario.fechaDeNacimiento,
+        GENERO:usuario.genero})
+    .then((data) => {
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+        db.destroy();
+    });
+    return retorno;
+}
 
 async function consultarPosts(){
     let retorno={};
@@ -76,11 +108,41 @@ async function consultarPostsPorUsuarioId(idUsuario){
     return retorno;
 }
 
+async function crearPost(post){
+    let retorno={};
+    await db('post').insert({ FOTO_POST: post.foto,
+                            DESCRIPCION_POST:foto.descripcionComentario,
+                            ID_USUARIO:foto.idUsuario,
+                            FECHA_POST:tomarFechaDeHoy()})
+    .then((data) => {
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+        db.destroy();
+    });
+    return retorno;
+}
+
 async function consultarComentariosPorPostId(idPost){
     let retorno={};
     await db.from('comentario').select("*").where('ID_POST', idPost)
     .then((data) => {
         //retorno = Object.assign({},data)
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+        db.destroy();
+    });
+    return retorno;
+}
+
+async function crearComentario(comentario){
+    let retorno={};
+    await db('comentario').insert({ ID_POST: comentario.idPost,
+                                    DESCRIPCION_COMENTARIO:comentario.descripcionComentario,
+                                    ID_USUARIO:comentario.idUsuario,
+                                    FECHA_COMENTARIO:tomarFechaDeHoy()})
+    .then((data) => {
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
@@ -102,7 +164,6 @@ async function consultarReaccionesPorPostId(idPost){
     return retorno;
 }
 
-/*INSERT INTO `reacciones` (`ID_REACCION`, `ID_TIPO_REACCION`, `ID_POST`, `ID_USUARIO`, `TIPO_REACCION`) VALUES (NULL, '1', '1', '1', NULL); */
 async function eliminarReaccion(idReaccion){
     let retorno={};
     await db.from('reacciones').where('ID_REACCION', idReaccion).del()
@@ -169,7 +230,7 @@ async function eliminarSeguimiento(idRelacion){
     return retorno;
 }
 
-//eliminar relacion de seguimiento 
+//crear relacion de seguimiento 
 async function crearSeguimiento(seguimiento){
     let retorno={};
     await db('seguimiento').insert({ID_USUARIO: seguimiento.idUsuarioASeguir,
@@ -189,20 +250,25 @@ async function crearSeguimiento(seguimiento){
 seguimiento.idUsuarioASeguir=1
 seguimiento.idUsuarioSeguidor=2*/
 
-let reaccion = reaccionInterfaz.reaccion
+/*let reaccion = reaccionInterfaz.reaccion
 reaccion.idTipoDeReaccion=1
 reaccion.idPost=1
-reaccion.idUsuario=2
+reaccion.idUsuario=2*/
 
-crearReaccion(reaccion).then(
+/*let comentario = comentarioInterfaz.comentario
+comentario.descripcionComentario="Holi bb muy buen topster"
+comentario.idPost=1
+comentario.idUsuario=2*/
+
+crearComentario(comentario).then(
     (data)=>{
         console.log(data);})
 
 module.exports = {
     db,
-    consultarUsuarioPorId,consultarUsuarios,/*crearUsuario,actualizarUsuario,*/
-    consultarPosts,consultarPostsPorUsuarioId,
-    consultarComentariosPorPostId,/*crearComentario,*/
+    consultarUsuarioPorId,consultarUsuarios,crearUsuario,actualizarUsuario,
+    consultarPosts,consultarPostsPorUsuarioId,crearPost,
+    consultarComentariosPorPostId,crearComentario,
     consultarReaccionesPorPostId,eliminarReaccion,crearReaccion,
     consultarTipoDeReaccion,
     consultarSeguimientoDeUsuarioId, eliminarSeguimiento,crearSeguimiento

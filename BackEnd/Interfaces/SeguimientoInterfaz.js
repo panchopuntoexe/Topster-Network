@@ -1,4 +1,6 @@
 let seguimiento = {
+    idSeguimiento:null,
+
     idUsuarioASeguir:null,
     idUsuarioSeguidor:null
 }
