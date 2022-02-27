@@ -13,7 +13,7 @@ app.set('json spaces', 2)
 app.use(cors())
 
 //http://localhost:3000/album/
-app.get('/album/', (req, res) => {
+app.get('/usuarios/', (req, res) => {
     try {
         res.json(controlador.mostrarListaDeAlbums());
     } catch (e) {

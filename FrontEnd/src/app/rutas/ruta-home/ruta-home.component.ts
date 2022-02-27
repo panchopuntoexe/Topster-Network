@@ -9,7 +9,14 @@ export class RutaHomeComponent implements OnInit {
 
   constructor() { }
 
+  posts={}
+
   ngOnInit(): void {
   }
+
+  consultarPosts(){
+    //TODO consultar seguidos y consultar posts de estos-> lleno a posts{}
+  }
+
 
 }

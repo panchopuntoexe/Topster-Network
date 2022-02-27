@@ -3,7 +3,8 @@ let comentario = {
 
     idPost:null,
     idUsuario:null,
-    descripcionComentario:null
+    descripcionComentario:null,
+    fechaComentario:null
 }
 
 module.exports = {comentario}

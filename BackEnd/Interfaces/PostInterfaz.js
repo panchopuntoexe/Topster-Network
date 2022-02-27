@@ -1,9 +1,9 @@
 let post = {
     idPost:null,
-
+    idUsuario:null,
     foto:null,
     descripcion:null,
-    idUsuario:null
+    fecha:null
 }
 
 module.exports = {post}

@@ -4,6 +4,7 @@ const reaccionInterfaz = require('./Interfaces/ReaccionInterfaz')
 const comentarioInterfaz = require('./Interfaces/ComentarioInterfaz')
 const postInterfaz = require('./Interfaces/PostInterfaz')
 const usuarioInterfaz = require('./Interfaces/UsuarioInterfaz')
+const tipoDeReaccionInterfaz = require('./Interfaces/TipoDeReaccion')
 
 const db = require('knex')({
     client: 'mysql',
@@ -26,7 +27,7 @@ async function consultarUsuarioPorId(idUsuario){
     .finally(() => {
         db.destroy();
     });
-    return retorno
+    return arrayDeObjectosAUsuarios(retorno)
 }
 
 async function consultarUsuarios(){
@@ -39,7 +40,20 @@ async function consultarUsuarios(){
     .finally(() => {
         db.destroy();
     });
-    return retorno
+    return arrayDeObjectosAUsuarios(retorno)
+}
+
+async function consultarUsuarioPorNombre(nicknameUsuario){
+    let retorno={};
+    await db.from('usuario').select("*").whereILike('NICKNAME', '%'+nicknameUsuario+'%')
+    .then((data) => {
+        //retorno = Object.assign({},data)
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+        db.destroy();
+    });
+    return arrayDeObjectosAUsuarios(retorno)
 }
 
 async function crearUsuario(usuario){
@@ -92,7 +106,7 @@ async function consultarPosts(){
     .finally(() => {
         db.destroy();
     });
-    return retorno
+    return arrayDeObjectosAPosts(retorno)
 }
 
 async function consultarPostsPorUsuarioId(idUsuario){
@@ -105,7 +119,7 @@ async function consultarPostsPorUsuarioId(idUsuario){
     .finally(() => {
         db.destroy();
     });
-    return retorno;
+    return arrayDeObjectosAPosts(retorno);
 }
 
 async function crearPost(post){
@@ -133,7 +147,7 @@ async function consultarComentariosPorPostId(idPost){
     .finally(() => {
         db.destroy();
     });
-    return retorno;
+    return arrayDeObjectosAComentarios(retorno);
 }
 
 async function crearComentario(comentario){
@@ -161,7 +175,7 @@ async function consultarReaccionesPorPostId(idPost){
     .finally(() => {
         db.destroy();
     });
-    return retorno;
+    return arrayDeObjectosAReacciones(retorno);
 }
 
 async function eliminarReaccion(idReaccion){
@@ -200,10 +214,10 @@ async function consultarTipoDeReaccion(idTipoDeReaccion){
     .finally(() => {
         db.destroy();
     });
-    return retorno;
+    return arrayDeObjectosATipoDeReaccion(retorno);
 }
 
-//quién le sigue al usuario 	ID_USUARIO?
+//quién le sigue al usuario ID_USUARIO?
 async function consultarSeguimientoDeUsuarioId(idUsuario){
     let retorno={};
     await db.from('seguimiento').select("*").where('ID_USUARIO', idUsuario)
@@ -214,7 +228,21 @@ async function consultarSeguimientoDeUsuarioId(idUsuario){
     .finally(() => {
         db.destroy();
     });
-    return retorno;
+    return arrayDeObjectosASeguimientos(retorno);
+}
+
+//a quién sigue de usuario ID
+async function consultarSeguidoresDeUsuarioId(idUsuario){
+    let retorno={};
+    await db.from('seguimiento').select("*").where('USU_ID_USUARIO', idUsuario)
+    .then((data) => {
+        //retorno = Object.assign({},data)
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+        db.destroy();
+    });
+    return arrayDeObjectosASeguimientos(retorno);
 }
 
 //eliminar relacion de seguimiento 
@@ -260,18 +288,21 @@ comentario.descripcionComentario="Holi bb muy buen topster"
 comentario.idPost=1
 comentario.idUsuario=2*/
 
-crearComentario(comentario).then(
+consultarSeguimientoDeUsuarioId(1).then(
     (data)=>{
-        console.log(data);})
+        console.log(data);
+    })
 
 module.exports = {
     db,
-    consultarUsuarioPorId,consultarUsuarios,crearUsuario,actualizarUsuario,
+    consultarUsuarioPorId,consultarUsuarios,consultarUsuarioPorNombre,crearUsuario,actualizarUsuario,
     consultarPosts,consultarPostsPorUsuarioId,crearPost,
     consultarComentariosPorPostId,crearComentario,
     consultarReaccionesPorPostId,eliminarReaccion,crearReaccion,
     consultarTipoDeReaccion,
-    consultarSeguimientoDeUsuarioId, eliminarSeguimiento,crearSeguimiento
+    consultarSeguimientoDeUsuarioId, consultarSeguidoresDeUsuarioId, eliminarSeguimiento,crearSeguimiento,
+
+    arrayDeObjectosAUsuarios
     
 };
 
@@ -281,4 +312,94 @@ function tomarFechaDeHoy(){
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
     return date+' '+time;
+}
+
+function arrayDeObjectosAUsuarios(arrayDeObjectosSQL){
+    let listaDeUsuarios =[]
+    let usuarioAuxiliar = usuarioInterfaz.usuario
+    arrayDeObjectosSQL.forEach(element => {
+        usuarioAuxiliar.idUsuario=element.ID_USUARIO
+        usuarioAuxiliar.fotoDePerfil=element.FOTO_PERFIL
+        usuarioAuxiliar.nickname=element.NICKNAME
+        usuarioAuxiliar.biografia=element.BIOGRAFIA
+        usuarioAuxiliar.fechaDeNacimiento=element.FECHA_NACIMIENTO
+        usuarioAuxiliar.apellidos=element.APELLIDOS_USUARIO
+        usuarioAuxiliar.nombres=element.NOMBRES_USUARIO
+        usuarioAuxiliar.correo=element.CORREO
+        usuarioAuxiliar.clave=element.CLAVE
+        usuarioAuxiliar.genero=element.GENERO
+
+        listaDeUsuarios.push(Object.assign({},usuarioAuxiliar))
+    });
+    return listaDeUsuarios
+}
+
+function arrayDeObjectosAPosts(arrayDeObjectosSQL){
+    let listaDePosts =[]
+    let postAuxiliar = postInterfaz.post
+    arrayDeObjectosSQL.forEach(element => {
+        postAuxiliar.idPost=element.ID_USUARIO
+        postAuxiliar.idUsuario=element.FOTO_PERFIL
+        postAuxiliar.foto=element.FOTO_POST
+        postAuxiliar.descripcion=element.DESCRIPCION_POST
+        postAuxiliar.fecha=element.FECHA_POST
+
+        listaDePosts.push(Object.assign({},postAuxiliar))
+    });
+    return listaDePosts
+}
+
+function arrayDeObjectosAComentarios(arrayDeObjectosSQL){
+    let listaDeComentarios =[]
+    let comentarioAuxiliar = comentarioInterfaz.comentario
+    arrayDeObjectosSQL.forEach(element => {
+        comentarioAuxiliar.idComentario=element.ID_COMENTARIO
+        comentarioAuxiliar.idPost=element.ID_POST
+        comentarioAuxiliar.idUsuario=element.ID_USUARIO
+        comentarioAuxiliar.descripcionComentario=element.DESCRIPCION_COMENTARIO
+        comentarioAuxiliar.fechaComentario=element.FECHA_COMENTARIO
+
+        listaDeComentarios.push(Object.assign({},comentarioAuxiliar))
+    });
+    return listaDeComentarios
+}
+
+function arrayDeObjectosAReacciones(arrayDeObjectosSQL){
+    let listaDeReacciones =[]
+    let reaccionAuxiliar = reaccionInterfaz.reaccion
+    arrayDeObjectosSQL.forEach(element => {
+        reaccionAuxiliar.idReaccion=element.ID_REACCION
+        reaccionAuxiliar.idPost=element.ID_POST
+        reaccionAuxiliar.idTipoDeReaccion=element.ID_TIPO_REACCION
+        reaccionAuxiliar.idUsuario=element.ID_USUARIO
+
+        listaDeReacciones.push(Object.assign({},reaccionAuxiliar))
+    });
+    return listaDeReacciones
+}
+
+function arrayDeObjectosATipoDeReaccion(arrayDeObjectosSQL){
+    let listaDeTipoReacciones =[]
+    let tipoDeReaccionAuxiliar = tipoDeReaccionInterfaz.tipoDeReaccion
+    arrayDeObjectosSQL.forEach(element => {
+        tipoDeReaccionAuxiliar.idReaccion=element.ID_TIPO_REACCION
+        tipoDeReaccionAuxiliar.nombreReaccion=element.NOMBRES_REACCION
+
+        listaDeTipoReacciones.push(Object.assign({},tipoDeReaccionAuxiliar))
+    });
+    return listaDeTipoReacciones
+}
+
+function arrayDeObjectosASeguimientos(arrayDeObjectosSQL){
+    let listaDeSeguimientos =[]
+    let seguimientoAuxiliar = seguimientoInterfaz.seguimiento
+    arrayDeObjectosSQL.forEach(element => {
+        seguimientoAuxiliar.idSeguimiento=element.ID_RELACION
+        seguimientoAuxiliar.idUsuarioASeguir=element.ID_USUARIO
+        seguimientoAuxiliar.idUsuarioSeguidor=element.USU_ID_USUARIO
+        seguimientoAuxiliar.fechaRelacion=element.FECHA_RELACION
+
+        listaDeSeguimientos.push(Object.assign({},seguimientoAuxiliar))
+    });
+    return listaDeSeguimientos
 }
