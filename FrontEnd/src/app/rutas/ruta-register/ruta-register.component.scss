@@ -1,16 +1,18 @@
-
+/*{
+    border: solid 1px red
+}*/
 
 .container{
-    padding-top: 6%;
-    padding-bottom: 5.6%;
+    padding-top: 4%;
+    padding-bottom: 2.25%;
 }
 
 .user_card {
-    height: 575px;
+    height: 625px;
     width: 400px;
     margin-top: auto;
     margin-bottom: auto;
-    background: rgb(52, 175, 173, 1);
+    background: #2c86ff;
     position: relative;
     display: flex;
     justify-content: center;
@@ -28,7 +30,7 @@
     width: 100px;
     top: -50px;
     border-radius: 50%;
-    background: #f39c12;
+    background: #686054;
     padding: 10px;
     text-align: center;
 }

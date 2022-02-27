@@ -1,5 +1,5 @@
-/* {
-    border:solid 1px red
+/*{
+    border: solid red 1px
 }*/
 
 .card {
@@ -66,21 +66,3 @@
 .nav-link {
     color: black;
 }
-
-div {
-    position: relative;
-    overflow: hidden;
-  }
-
-  input {
-    position: absolute;
-    font-size: 10px;
-    opacity: 0;
-    right: 0;
-    top: 0;
-  }
-
-  .btn-group-lg>.btn, .btn-lg {
-    padding: 0.4rem 1rem;
-    font-size: 1rem;
-  }
