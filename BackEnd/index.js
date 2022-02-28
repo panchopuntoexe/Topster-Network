@@ -12,6 +12,43 @@ app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2)
 app.use(cors())
 
+//http://localhost:3000/usuario/1
+
+//http://localhost:3000/usuarios/
+
+//http://localhost:3000/usuarios/nickname
+
+//http://localhost:3000/usuario/usuarioData
+
+//http://localhost:3000/usuario/usuarioData
+
+//http://localhost:3000/post/
+
+//http://localhost:3000/post/usuarioid
+
+//http://localhost:3000/post/postData
+
+//http://localhost:3000/comentario/postId
+
+//http://localhost:3000/comentario/comentarioData
+
+//http://localhost:3000/reccion/postId
+
+//http://localhost:3000/reaccion/
+
+//http://localhost:3000/reaccion/reaccionData
+
+//http://localhost:3000/usuario/usuarioData
+
+//http://localhost:3000/usuario/usuarioData
+
+//http://localhost:3000/usuario/usuarioData
+
+//http://localhost:3000/usuario/usuarioData
+
+//http://localhost:3000/usuario/usuarioData
+
+
 //http://localhost:3000/album/
 app.get('/usuarios/', (req, res) => {
     try {

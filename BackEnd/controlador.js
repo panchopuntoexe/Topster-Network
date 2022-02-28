@@ -293,6 +293,9 @@ consultarSeguimientoDeUsuarioId(1).then(
         console.log(data);
     })
 
+loadXHR("url-to-image").then(function(blob) {
+    // here the image is a blob
+    });
 module.exports = {
     db,
     consultarUsuarioPorId,consultarUsuarios,consultarUsuarioPorNombre,crearUsuario,actualizarUsuario,
@@ -300,9 +303,7 @@ module.exports = {
     consultarComentariosPorPostId,crearComentario,
     consultarReaccionesPorPostId,eliminarReaccion,crearReaccion,
     consultarTipoDeReaccion,
-    consultarSeguimientoDeUsuarioId, consultarSeguidoresDeUsuarioId, eliminarSeguimiento,crearSeguimiento,
-
-    arrayDeObjectosAUsuarios
+    consultarSeguimientoDeUsuarioId, consultarSeguidoresDeUsuarioId, eliminarSeguimiento,crearSeguimiento
     
 };
 
