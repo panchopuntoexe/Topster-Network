@@ -4,7 +4,7 @@ const reaccionInterfaz = require('./Interfaces/ReaccionInterfaz')
 const comentarioInterfaz = require('./Interfaces/ComentarioInterfaz')
 const postInterfaz = require('./Interfaces/PostInterfaz')
 const usuarioInterfaz = require('./Interfaces/UsuarioInterfaz')
-const tipoDeReaccionInterfaz = require('./Interfaces/TipoDeReaccion')
+const tipoDeReaccionInterfaz = require('./Interfaces/TipoDeReaccionInterfaz')
 
 const db = require('knex')({
     client: 'mysql',
