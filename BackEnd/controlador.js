@@ -288,14 +288,8 @@ comentario.descripcionComentario="Holi bb muy buen topster"
 comentario.idPost=1
 comentario.idUsuario=2*/
 
-consultarSeguimientoDeUsuarioId(1).then(
-    (data)=>{
-        console.log(data);
-    })
 
-loadXHR("url-to-image").then(function(blob) {
-    // here the image is a blob
-    });
+
 module.exports = {
     db,
     consultarUsuarioPorId,consultarUsuarios,consultarUsuarioPorNombre,crearUsuario,actualizarUsuario,

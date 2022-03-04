@@ -13,6 +13,25 @@ app.set('json spaces', 2)
 app.use(cors())
 
 //http://localhost:3000/usuario/1
+app.get('/usuario/:id', (req, res) => {
+    let usuarioId = req.params.id;
+    try {
+        let respuesta
+        controlador.consultarUsuarioPorId(usuarioId).then(
+            (data)=>{
+                respuesta=Object.assign({},data)
+                res.json(respuesta);
+            })
+
+        
+    } catch (e) {
+        res.json(
+            {
+                "error": "Error al mostrar usuario"
+            }
+        );
+    }
+})
 
 //http://localhost:3000/usuarios/
 
