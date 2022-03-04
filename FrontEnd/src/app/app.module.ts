@@ -13,6 +13,7 @@ import { RutaNotFoundComponent } from './rutas/ruta-not-found/ruta-not-found.com
 import { RutaPostComponent } from './rutas/ruta-post/ruta-post.component';
 import { PostsModule } from './componentes/posts/posts/posts.module';
 import { SearchCardsModule } from './componentes/search-cards/search-cards/search-cards.module';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SearchCardsModule } from './componentes/search-cards/search-cards/searc
     BrowserModule,
     AppRoutingModule,
     PostsModule,
-    SearchCardsModule
+    SearchCardsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

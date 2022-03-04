@@ -16,11 +16,9 @@ app.use(cors())
 app.get('/usuario/:id', (req, res) => {
     let usuarioId = req.params.id;
     try {
-        let respuesta
         controlador.consultarUsuarioPorId(usuarioId).then(
             (data)=>{
-                respuesta=Object.assign({},data)
-                res.json(respuesta);
+                res.json(data);
             })
 
         
