@@ -14,6 +14,7 @@ import { RutaPostComponent } from './rutas/ruta-post/ruta-post.component';
 import { PostsModule } from './componentes/posts/posts/posts.module';
 import { SearchCardsModule } from './componentes/search-cards/search-cards/search-cards.module';
 import {HttpClientModule} from "@angular/common/http";
+import { CommentsModule } from './componentes/comments/comments/comments.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     PostsModule,
     SearchCardsModule,
+    CommentsModule,
     HttpClientModule
   ],
   providers: [],
