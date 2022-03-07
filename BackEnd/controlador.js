@@ -125,8 +125,8 @@ async function consultarPostsPorUsuarioId(idUsuario){
 async function crearPost(post){
     let retorno={};
     await db('post').insert({ FOTO_POST: post.foto,
-                            DESCRIPCION_POST:foto.descripcionComentario,
-                            ID_USUARIO:foto.idUsuario,
+                            DESCRIPCION_POST:post.descripcion,
+                            ID_USUARIO:post.idUsuario,
                             FECHA_POST:tomarFechaDeHoy()})
     .then((data) => {
         retorno = JSON.parse(JSON.stringify(data))
