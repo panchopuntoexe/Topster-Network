@@ -20,23 +20,23 @@ const routes: Routes = [
     component: RutaRegisterComponent
   },
   {
-    path: 'home',
+    path: 'home/:nombreUsuario',
     component: RutaHomeComponent 
   },
   {
-    path: 'search',
+    path: 'search/:nombreUsuario',
     component: RutaSearchComponent 
   },
   {
-    path: 'profile',
+    path: 'profile/:nombreUsuario',
     component: RutaProfileComponent
   },
   {
-    path: 'edit',
+    path: 'edit/:nombreUsuario',
     component: RutaEditComponent
   },
   {
-    path: 'post',
+    path: 'post/:nombreUsuario',
     component: RutaPostComponent
   },
   {

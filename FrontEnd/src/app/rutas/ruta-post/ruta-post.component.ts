@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
 
 @Component({
   selector: 'app-ruta-post',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaPostComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly dbTopsterService: DbtopsterService,
+    private readonly router: Router,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  crearPost(){
+  //Creación del Post del usuario
+  const ruta = ['/home/nombreUsuario'];
+  this.router.navigate(ruta);
   }
 
 }
