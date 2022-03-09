@@ -25,7 +25,7 @@ async function consultarUsuarioPorId(idUsuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosAUsuarios(retorno)
 }
@@ -38,7 +38,6 @@ async function consultarUsuarios(){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
     });
     return arrayDeObjectosAUsuarios(retorno)
 }
@@ -51,7 +50,7 @@ async function consultarUsuarioPorNombre(nicknameUsuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosAUsuarios(retorno)
 }
@@ -71,7 +70,7 @@ async function crearUsuario(usuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -91,7 +90,7 @@ async function actualizarUsuario(usuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -104,7 +103,7 @@ async function consultarPosts(){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosAPosts(retorno)
 }
@@ -117,7 +116,7 @@ async function consultarPostsPorUsuarioId(idUsuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosAPosts(retorno);
 }
@@ -132,7 +131,7 @@ async function crearPost(post){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -145,7 +144,7 @@ async function consultarComentariosPorPostId(idPost){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosAComentarios(retorno);
 }
@@ -160,7 +159,7 @@ async function crearComentario(comentario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -173,7 +172,7 @@ async function consultarReaccionesPorPostId(idPost){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosAReacciones(retorno);
 }
@@ -185,7 +184,7 @@ async function eliminarReaccion(idReaccion){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -199,7 +198,7 @@ async function crearReaccion(reaccion){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -212,7 +211,7 @@ async function consultarTipoDeReaccion(idTipoDeReaccion){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosATipoDeReaccion(retorno);
 }
@@ -226,7 +225,7 @@ async function consultarSeguimientoDeUsuarioId(idUsuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosASeguimientos(retorno);
 }
@@ -240,7 +239,7 @@ async function consultarSeguidoresDeUsuarioId(idUsuario){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return arrayDeObjectosASeguimientos(retorno);
 }
@@ -253,7 +252,7 @@ async function eliminarSeguimiento(idRelacion){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }
@@ -268,7 +267,7 @@ async function crearSeguimiento(seguimiento){
         retorno = JSON.parse(JSON.stringify(data))
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-        db.destroy();
+         
     });
     return retorno;
 }

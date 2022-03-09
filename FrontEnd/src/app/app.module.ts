@@ -15,6 +15,7 @@ import { PostsModule } from './componentes/posts/posts/posts.module';
 import { SearchCardsModule } from './componentes/search-cards/search-cards/search-cards.module';
 import {HttpClientModule} from "@angular/common/http";
 import { CommentsModule } from './componentes/comments/comments/comments.module';
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CommentsModule } from './componentes/comments/comments/comments.module'
     PostsModule,
     SearchCardsModule,
     CommentsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [],
