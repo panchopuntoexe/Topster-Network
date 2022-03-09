@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
+import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 
 @Component({
   selector: 'app-ruta-profile',
@@ -9,12 +10,27 @@ import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
 })
 export class RutaProfileComponent implements OnInit {
 
+  nombreDeUsuario:string=""
+  usuario?:UsuarioInterfaz
+
   constructor(
     private readonly dbTopsterService: DbtopsterService,
     private readonly router: Router,
+    public readonly activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute
+      .params
+      .subscribe(
+        {
+          next: (parametrosDeRuta) => {
+            const nombre = parametrosDeRuta['nombreUsuario'];
+            this.nombreDeUsuario = nombre;
+            this.obtenerPerfilUsuario()
+          }
+        }
+      )
   }
 
   seguirUsuario(){
@@ -26,7 +42,14 @@ export class RutaProfileComponent implements OnInit {
   }
 
   obtenerPerfilUsuario(){
-    //Obtener los datos del usuario
+    this.dbTopsterService.consultarUsuariosPorNombre(this.nombreDeUsuario).subscribe({
+      next: (datos) => {
+        this.usuario = datos[0];
+      },
+      error: (error) => {
+        console.error({error});
+      }
+    })
   }
 
   editarPerfil(){

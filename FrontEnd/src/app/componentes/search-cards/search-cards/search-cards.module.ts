@@ -16,4 +16,8 @@ import { SearchCardsComponent } from './search-cards.component';
   ]
 })
 
-export class SearchCardsModule { }
+export class SearchCardsModule { 
+
+
+}
+

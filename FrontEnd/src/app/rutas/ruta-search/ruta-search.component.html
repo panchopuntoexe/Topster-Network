@@ -9,7 +9,6 @@
                 Topster
             </a>
 
-
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,8 +75,8 @@
     <div class="container mt-3 mb-3" style="padding-left: 20%; padding-right: 10%;">
         <h6>Buscar Usuario:</h6>
         <div class="row">
-            <div class="col-md-10" style="align-self: center">
-                <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+            <div [formGroup]="formGroup" *ngIf="formGroup" class="col-md-10" style="align-self: center">
+                <input class="form-control mr-sm-2" formControlName="nombreABuscar" id="nombreABuscar" type="search" placeholder="Buscar" aria-label="Search">
             </div>
             <div class="col-md-2" style="align-self: center">
                 <button (click)="buscarUsuario()" type="button" class="btn btn-secondary" style="padding: 5px 7px">
@@ -93,7 +92,8 @@
     </div>
 
 
-    <div class="container pb-3">
-        <app-search-cards></app-search-cards>
+    <div class="container pb-3" *ngFor="let tarjeta of arregloTarjetas; let i = index">
+        <app-search-cards [usuario]="tarjeta"
+        ></app-search-cards>
     </div>
 </div>
