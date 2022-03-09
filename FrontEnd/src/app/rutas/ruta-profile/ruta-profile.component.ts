@@ -11,7 +11,18 @@ import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 export class RutaProfileComponent implements OnInit {
 
   nombreDeUsuario:string=""
-  usuario?:UsuarioInterfaz
+  usuario:UsuarioInterfaz = {
+    idUsuario: 1,
+    nickname: "nickname",
+    biografia: "biografia",
+    apellidos: "apellidos",
+    nombres: "nombres",
+    correo: "correo",
+    clave: "clave",
+    fechaDeNacimiento: "06/07/1999",
+    genero: "Hombre",
+    fotoDePerfil: {type: ArrayBuffer,data: []}
+  }
 
   constructor(
     private readonly dbTopsterService: DbtopsterService,
@@ -26,7 +37,7 @@ export class RutaProfileComponent implements OnInit {
         {
           next: (parametrosDeRuta) => {
             const nombre = parametrosDeRuta['nombreUsuario'];
-            this.nombreDeUsuario = nombre;
+            this.nombreDeUsuario = nombre as string;
             this.obtenerPerfilUsuario()
           }
         }
@@ -42,9 +53,11 @@ export class RutaProfileComponent implements OnInit {
   }
 
   obtenerPerfilUsuario(){
-    this.dbTopsterService.consultarUsuariosPorNombre(this.nombreDeUsuario).subscribe({
+    this.dbTopsterService.consultarUsuariosPorNombre(this.nombreDeUsuario)
+    .subscribe({
       next: (datos) => {
-        this.usuario = datos[0];
+        this.usuario = Object.assign({},datos[0]);
+        console.log(datos[0])
       },
       error: (error) => {
         console.error({error});
@@ -54,7 +67,7 @@ export class RutaProfileComponent implements OnInit {
 
   editarPerfil(){
     //Solo redirecciona a editar perfil del usuario
-    const ruta = ['/edit/nombreUsuario'];
+    const ruta = ['/edit/'+this.nombreDeUsuario];
     this.router.navigate(ruta);
   }
 

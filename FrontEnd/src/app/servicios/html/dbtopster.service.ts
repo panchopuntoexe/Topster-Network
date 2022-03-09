@@ -42,6 +42,7 @@ export class DbtopsterService {
       )
   }
 
+  
   consultarUsuariosPorNombre(nombreDeUsuario: string): Observable<UsuarioInterfaz[]> {
     const url = environment.url + '/usuarios/' + nombreDeUsuario
     return this.httpClient

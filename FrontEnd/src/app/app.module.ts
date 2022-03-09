@@ -16,6 +16,7 @@ import { SearchCardsModule } from './componentes/search-cards/search-cards/searc
 import {HttpClientModule} from "@angular/common/http";
 import { CommentsModule } from './componentes/comments/comments/comments.module';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SafeUrlPipe } from './servicios/safe-url.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     RutaProfileComponent,
     RutaEditComponent,
     RutaNotFoundComponent,
-    RutaPostComponent
+    RutaPostComponent,
+    SafeUrlPipe
   ],
   imports: [
     BrowserModule,

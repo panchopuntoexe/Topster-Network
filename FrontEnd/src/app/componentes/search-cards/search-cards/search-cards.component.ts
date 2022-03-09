@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search-cards',
@@ -10,8 +11,10 @@ export class SearchCardsComponent implements OnInit {
 
   arreglo = {}
 
+  src!: SafeResourceUrl;
+
   @Input()
-  usuario:UsuarioInterfaz={
+  usuario: UsuarioInterfaz = {
     idUsuario: 1,
     nickname: "nickname",
     biografia: "biografia",
@@ -21,13 +24,39 @@ export class SearchCardsComponent implements OnInit {
     clave: "clave",
     fechaDeNacimiento: "06/07/1999",
     genero: "Hombre",
-    fotoDePerfil: undefined as unknown as Blob
+    fotoDePerfil: {type: ArrayBuffer,data: []}
   }
 
 
-  constructor() { }
+  constructor(
+    private sanitizer: DomSanitizer
+  ) { }
+
 
   ngOnInit(): void {
+    let objectURL = 'data:image/jpg;base64,' + this._arrayBufferToBase64(this.usuario.fotoDePerfil.data);
+    this.src = this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
+
+  toArrayBuffer(buf: string | any[]):ArrayBuffer {
+    const ab = new ArrayBuffer(buf.length);
+    const view = new Uint8Array(ab);
+    for (let i = 0; i < buf.length; ++i) {
+        view[i] = buf[i];
+    }
+    return ab;
+}
+
+
+  _arrayBufferToBase64(buffer: Iterable<number>) {
+    var binary = '';
+    var bytes = new Uint8Array(buffer);
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  }
+
 
 }

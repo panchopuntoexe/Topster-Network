@@ -42,7 +42,7 @@ export class RutaSearchComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       nombreABuscar: new FormControl(
         {
-          value: 'panchpunto',
+          value: '',
           disabled: false
         }
       )
