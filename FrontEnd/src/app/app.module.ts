@@ -17,6 +17,10 @@ import {HttpClientModule} from "@angular/common/http";
 import { CommentsModule } from './componentes/comments/comments/comments.module';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SafeUrlPipe } from './servicios/safe-url.pipe';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,10 @@ import { SafeUrlPipe } from './servicios/safe-url.pipe';
     CommentsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

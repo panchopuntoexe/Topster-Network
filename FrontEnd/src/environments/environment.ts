@@ -4,7 +4,16 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:3000'
+  url: 'http://localhost:3000',
+  // Your web app's Firebase configuration
+  firebase: {
+    apiKey: "AIzaSyCVO51u2WQDdILntViHKnNwDQ_P1chTcHU",
+    authDomain: "topsternetwork.firebaseapp.com",
+    projectId: "topsternetwork",
+    storageBucket: "topsternetwork.appspot.com",
+    messagingSenderId: "581940371964",
+    appId: "1:581940371964:web:7987412775a48c698c1279"
+  }
 };
 
 /*

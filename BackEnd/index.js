@@ -18,8 +18,6 @@ app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2)
 app.use(cors())
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
 
 //http://localhost:3000/usuario/1
 app.get('/usuario/:id', (req, res) => {
