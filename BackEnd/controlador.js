@@ -88,9 +88,9 @@ async function actualizarUsuario(usuario){
         GENERO:usuario.genero})
     .then((data) => {
         retorno = JSON.parse(JSON.stringify(data))
+        console.log(retorno)
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
-         
     });
     return retorno;
 }

@@ -1,7 +1,7 @@
 export interface PostInterfaz {
     idPost:null,
     idUsuario:null,
-    foto:null,
+    foto:string,
     descripcion:null,
     fecha:null
 }

@@ -1,6 +1,6 @@
 export interface UsuarioInterfaz {
     idUsuario:number,
-    fotoDePerfil:{type: any,data: any},
+    fotoDePerfil:string,
     nickname:string,
     biografia:string,
     apellidos:string,

@@ -72,7 +72,7 @@
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" [formGroup]="formGroup" *ngIf="formGroup">
     <!-- DATA -->
     <div class="d-flex justify-content-center mt-4 mb-4">
         <div class="col col-lg-auto">
@@ -81,7 +81,7 @@
         </div>
         <div class="row justify-content-md-center">
             <div class="ps-2 col-md-auto align-self-center">
-                <h2 class="m-0">[nombreUsuario]</h2>
+                <h2 class="m-0">{{nombreDeUsuario}}</h2>
             </div>
             <div class="d-flex flex-row m-0 justify-content-evenly">
                 <div class="file btn btn-lg btn-primary">
@@ -110,7 +110,7 @@
                         <path
                             d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
                     </svg>
-                    <span class="ms-2" style="font-size: x-large;">Nombre</span>
+                    <span class="ms-2" style="font-size: x-large;">Nombres</span>
                 </div>
 
             </div>
@@ -119,8 +119,35 @@
     <div class="d-flex justify-content-center mb-3 mt-1">
         <div class="col-8 justify-content-start pl-1 pr-1">
             <div class="form-group pb-2">
-                <input type="text" class="form-control myFile" id="exampleInputAñoFabricación"
+                <input formControlName="nombre" id="nombre" type="text" class="form-control myFile"
                     aria-describedby="nombreHelp" placeholder="Nombre">
+            </div>
+        </div>
+    </div>
+
+    <!-- Apellido -->
+    <div class="d-flex justify-content-center">
+        <div class="col-8 justify-content-start pl-1 pr-1">
+            <div class="row">
+                <div class="d-flex align-middle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-card-text" viewBox="0 0 16 16" style="margin-top: 4px">
+                        <path
+                            d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                        <path
+                            d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                    <span class="ms-2" style="font-size: x-large;">Apellidos</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mb-3 mt-1">
+        <div class="col-8 justify-content-start pl-1 pr-1">
+            <div class="form-group pb-2">
+                <input type="text" class="form-control myFile" formControlName="apellido" id="apellido"
+                    aria-describedby="apellidoHelp" placeholder="Apellidos">
             </div>
         </div>
     </div>
@@ -145,7 +172,7 @@
     <div class="d-flex justify-content-center mb-3 mt-1">
         <div class="col-8 justify-content-start pl-1 pr-1">
             <div class="form-group pb-2">
-                <input type="text" class="form-control" id="exampleInputAñoFabricación" aria-describedby="nombreHelp"
+                <input type="text" class="form-control" formControlName="nombreDeUsuario" id="nombreDeUsuario" aria-describedby="nombreHelp"
                     placeholder="Nombre de Usuario" readonly>
             </div>
         </div>
@@ -167,7 +194,7 @@
     </div>
     <div class="d-flex justify-content-center mb-3 mt-1">
         <div class="col-8 justify-content-start">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5">Información de la Bio</textarea>
+            <textarea class="form-control" formControlName="biografia" id="biografia" rows="5">Información de la Bio</textarea>
         </div>
     </div>
 
@@ -190,36 +217,12 @@
     <div class="d-flex justify-content-center mb-3 mt-1">
         <div class="col-8 justify-content-start pl-1 pr-1">
             <div class="form-group pb-2">
-                <input type="text" class="form-control" id="exampleInputAñoFabricación" aria-describedby="nombreHelp"
+                <input type="text" class="form-control" formControlName="correo" id="correo" aria-describedby="nombreHelp"
                     placeholder="Nombre de Usuario">
             </div>
         </div>
     </div>
 
-    <!-- Nombre de teléfono -->
-    <div class="d-flex justify-content-center">
-        <div class="col-8 justify-content-start pl-1 pr-1">
-            <div class="row">
-                <div class="d-flex align-middle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                        class="bi bi-telephone-fill" viewBox="0 0 16 16" style="margin-top: 4px">
-                        <path fill-rule="evenodd"
-                            d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                    </svg>
-                    <span class="ms-2" style="font-size: x-large;">Número de Teléfono</span>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center mb-3 mt-1">
-        <div class="col-8 justify-content-start pl-1 pr-1">
-            <div class="form-group pb-2">
-                <input type="text" class="form-control" id="exampleInputAñoFabricación" aria-describedby="nombreHelp"
-                    placeholder="Número de Teléfono">
-            </div>
-        </div>
-    </div>
 
     <!-- Género -->
     <div class="d-flex justify-content-center">
@@ -240,7 +243,7 @@
     <div class="d-flex justify-content-center mb-3 mt-1">
         <div class="col-8 justify-content-start pl-1 pr-1">
             <div class="form-group pb-2">
-                <input type="text" class="form-control" id="exampleInputAñoFabricación" aria-describedby="nombreHelp"
+                <input type="text" class="form-control"formControlName="genero" id="genero" aria-describedby="nombreHelp"
                     placeholder="Nombre de Usuario">
             </div>
         </div>

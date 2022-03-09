@@ -65,13 +65,13 @@ export class DbtopsterService {
       )
   }
 
-  actualizarUsuario(usuario:UsuarioInterfaz) {
+  actualizarUsuario(usuario:UsuarioInterfaz):Observable<string> {
     const url = environment.url + '/usuario/'
-    this.httpClient
+    return this.httpClient
       .put(url,usuario)
       .pipe(
         map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
+          (resultadoEnDatos) => resultadoEnDatos as string
         )
       )
   }

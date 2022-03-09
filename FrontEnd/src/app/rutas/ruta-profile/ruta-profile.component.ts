@@ -21,7 +21,7 @@ export class RutaProfileComponent implements OnInit {
     clave: "clave",
     fechaDeNacimiento: "06/07/1999",
     genero: "Hombre",
-    fotoDePerfil: {type: ArrayBuffer,data: []}
+    fotoDePerfil: ""
   }
 
   constructor(

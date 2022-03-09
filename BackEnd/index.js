@@ -18,6 +18,8 @@ app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
 app.set('json spaces', 2)
 app.use(cors())
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 //http://localhost:3000/usuario/1
 app.get('/usuario/:id', (req, res) => {
@@ -119,14 +121,7 @@ app.put('/usuario/', (req, res) => {
         datosUsuario.clave = req.body.clave
         datosUsuario.fechaDeNacimiento = req.body.fechaDeNacimiento
         datosUsuario.genero = req.body.genero
-        controlador.actualizarUsuario(datosUsuario).then(
-            (data) => {
-                controlador.consultarUsuarios().then(
-                    (data) => {
-                        res.json(data);
-                    }
-                )
-            })
+        controlador.actualizarUsuario(datosUsuario)
     } catch (e) {
         res.json(
             {
