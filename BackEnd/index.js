@@ -37,6 +37,7 @@ app.get('/usuario/:id', (req, res) => {
     }
 })
 
+
 //http://localhost:3000/usuarios/
 app.get('/usuarios/', (req, res) => {
     try {
@@ -232,7 +233,7 @@ app.post('/comentario/', (req, res) => {
     }
 })
 //http://localhost:3000/reccion/postId
-app.get('/reccion/:postId', (req, res) => {
+app.get('/reaccion/:postId', (req, res) => {
     let postId = req.params.postId;
     try {
         controlador.consultarReaccionesPorPostId(postId).then(
@@ -248,8 +249,9 @@ app.get('/reccion/:postId', (req, res) => {
         );
     }
 })
+
 //http://localhost:3000/idReaccion/
-app.delete('/reccion/:idReaccion', (req, res) => {
+app.delete('/reaccion/:idReaccion', (req, res) => {
     let idReaccion = req.params.idReaccion;
     try {
         controlador.eliminarReaccion(idReaccion).then(
@@ -286,6 +288,7 @@ app.post('/reaccion/', (req, res) => {
         );
     }
 })
+
 //http://localhost:3000/tipoDeReaccion/idTipo
 app.get('/tipoDeReaccion/:idTipo', (req, res) => {
     let idTipo = req.params.idTipo;

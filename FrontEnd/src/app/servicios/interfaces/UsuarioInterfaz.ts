@@ -1,12 +1,12 @@
 export interface UsuarioInterfaz {
-    idUsuario:null,
-    fotoDePerfil:null,
-    nickname:null,
-    biografia:null,
-    apellidos:null,
-    nombres:null,
-    correo:null,
-    clave:null,
-    fechaDeNacimiento:null,
-    genero:null
+    idUsuario:number,
+    fotoDePerfil:Blob,
+    nickname:string,
+    biografia:string,
+    apellidos:string,
+    nombres:string,
+    correo:string,
+    clave:string,
+    fechaDeNacimiento:string,
+    genero:string
 }

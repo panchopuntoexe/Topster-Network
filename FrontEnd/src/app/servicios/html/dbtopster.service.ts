@@ -20,8 +20,8 @@ export class DbtopsterService {
     private readonly router: Router,
   ) { }
 
-  consultarUsuarios(userId: number): Observable<UsuarioInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+  consultarUsuarios(): Observable<UsuarioInterfaz[]> {
+    const url = environment.url + '/usuarios'
     return this.httpClient
       .get(url)
       .pipe(
@@ -42,8 +42,8 @@ export class DbtopsterService {
       )
   }
 
-  consultarUsuariosPorNombre(userId: number): Observable<UsuarioInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+  consultarUsuariosPorNombre(nombreDeUsuario: string): Observable<UsuarioInterfaz[]> {
+    const url = environment.url + '/usuarios/' + nombreDeUsuario
     return this.httpClient
       .get(url)
       .pipe(
@@ -53,10 +53,10 @@ export class DbtopsterService {
       )
   }
 
-  crearUsuario() {
+  crearUsuario(usuario:UsuarioInterfaz) {
     const url = environment.url + '/usuario/'
     this.httpClient
-      .get(url)
+      .post(url,usuario)
       .pipe(
         map(
           (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
@@ -64,10 +64,10 @@ export class DbtopsterService {
       )
   }
 
-  actualizarUsuario(userId: number) {
-    const url = environment.url + '/usuario/' + userId
-    return this.httpClient
-      .get(url)
+  actualizarUsuario(usuario:UsuarioInterfaz) {
+    const url = environment.url + '/usuario/'
+    this.httpClient
+      .put(url,usuario)
       .pipe(
         map(
           (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
@@ -75,8 +75,8 @@ export class DbtopsterService {
       )
   }
 
-  consultarPosts(userId: number): Observable<PostInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+  consultarPosts(): Observable<PostInterfaz[]> {
+    const url = environment.url + '/post/'
     return this.httpClient
       .get(url)
       .pipe(
@@ -87,7 +87,7 @@ export class DbtopsterService {
   }
 
   consultarPostsPorUsuarioId(userId: number): Observable<PostInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+    const url = environment.url + '/post/' + userId
     return this.httpClient
       .get(url)
       .pipe(
@@ -97,19 +97,19 @@ export class DbtopsterService {
       )
   }
 
-  crearPost(userId: number) {
-    const url = environment.url + '/usuario/' + userId
+  crearPost(post:PostInterfaz) {
+    const url = environment.url + '/post/'
     return this.httpClient
-      .get(url)
+      .post(url,post)
       .pipe(
         map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
+          (resultadoEnDatos) => resultadoEnDatos as PostInterfaz[]
         )
       )
   }
 
-  consultarComentariosPorPostId(userId: number): Observable<ComentarioInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+  consultarComentariosPorPostId(postId: number): Observable<ComentarioInterfaz[]> {
+    const url = environment.url + '/comentario/' + postId
     return this.httpClient
       .get(url)
       .pipe(
@@ -119,19 +119,15 @@ export class DbtopsterService {
       )
   }
 
-  crearComentario(userId: number) {
-    const url = environment.url + '/usuario/' + userId
+  crearComentario(comentario:ComentarioInterfaz) {
+    const url = environment.url + '/comentario/'
     return this.httpClient
-      .get(url)
-      .pipe(
-        map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
-        )
-      )
+      .post(url,comentario)
+      //no regresa nada brah
   }
 
-  consultarReaccionesPorPostId(userId: number): Observable<ReaccionInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+  consultarReaccionesPorPostId(postId: number): Observable<ReaccionInterfaz[]> {
+    const url = environment.url + '/reaccion/' + postId
     return this.httpClient
       .get(url)
       .pipe(
@@ -141,30 +137,20 @@ export class DbtopsterService {
       )
   }
 
-  eliminarReaccion(userId: number) {
-    const url = environment.url + '/usuario/' + userId
+  eliminarReaccion(reaccionId: number) {
+    const url = environment.url + '/reaccion/' + reaccionId
     return this.httpClient
-      .get(url)
-      .pipe(
-        map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
-        )
-      )
+      .delete(url)
   }
 
-  crearReaccion(userId: number) {
-    const url = environment.url + '/usuario/' + userId
+  crearReaccion(reaccion: ReaccionInterfaz) {
+    const url = environment.url + '/reaccion/'
     return this.httpClient
-      .get(url)
-      .pipe(
-        map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
-        )
-      )
+      .post(url,reaccion)
   }
 
-  consultarTipoDeReaccion(userId: number): Observable<TipoDeReaccionInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+  consultarTipoDeReaccion(idTipo: number): Observable<TipoDeReaccionInterfaz[]> {
+    const url = environment.url + '/tipoDeReaccion/' + idTipo
     return this.httpClient
       .get(url)
       .pipe(
@@ -173,9 +159,9 @@ export class DbtopsterService {
         )
       )
   }
-
+//quién le sigue al usuario ID_USUARIO?
   consultarSeguimientodeUsuarioId(userId: number): Observable<SeguimientoInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+    const url = environment.url + '/seguimiento/' + userId
     return this.httpClient
       .get(url)
       .pipe(
@@ -185,8 +171,9 @@ export class DbtopsterService {
       )
   }
 
+//a quién sigue de usuario ID
   consultarSeguidoresDeUsuarioId(userId: number): Observable<SeguimientoInterfaz[]> {
-    const url = environment.url + '/usuario/' + userId
+    const url = environment.url + '/seguidores/' + userId
     return this.httpClient
       .get(url)
       .pipe(
@@ -196,26 +183,16 @@ export class DbtopsterService {
       )
   }
 
-  eliminarSeguimiento(userId: number) {
-    const url = environment.url + '/usuario/' + userId
+  eliminarSeguimiento(idRelacion: number) {
+    const url = environment.url + '/usuario/' + idRelacion
     return this.httpClient
-      .get(url)
-      .pipe(
-        map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
-        )
-      )
+      .delete(url)
   }
 
-  crearSeguimiento(userId: number) {
-    const url = environment.url + '/usuario/' + userId
+  crearSeguimiento(seguimiento: SeguimientoInterfaz) {
+    const url = environment.url + '/seguimiento/'
     return this.httpClient
-      .get(url)
-      .pipe(
-        map(
-          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
-        )
-      )
+      .post(url,seguimiento)
   }
 
 }
