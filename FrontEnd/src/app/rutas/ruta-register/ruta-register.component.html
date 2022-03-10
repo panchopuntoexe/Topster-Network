@@ -8,50 +8,55 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center form_container">
-                <form class="form_options">
+                <form class="form_options" [formGroup]="registro">
                     <label>Nombres:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="Nombres">
+                        <input formControlName="nombres" type="text" name="" class="form-control input_user" value="" placeholder="Nombres">
                     </div>
                     <label>Apellidos:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="Apellidos">
+                        <input formControlName="apellidos" type="text" name="" class="form-control input_user" value="" placeholder="Apellidos">
                     </div>
                     <label>Correo Electrónico:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="Email">
+                        <input formControlName="correo" type="text" name="" class="form-control input_user" value="" placeholder="Email">
                     </div>
                     <label>Contraseña:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="password" name="" class="form-control input_pass" value=""
+                        <input formControlName="clave" type="password" name="" class="form-control input_pass" value=""
                             placeholder="Contraseña">
                     </div>
                     <label>Fecha de Nacimiento:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="date" name="" class="form-control input_user" value="" placeholder="Fecha">
+                        <input formControlName="nacimiento" type="date" name="" class="form-control input_user" value="" placeholder="Fecha">
                     </div>
 
                     <label>Género:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="Género">
+                        <input formControlName="genero" type="text" name="" class="form-control input_user" value="" placeholder="Género">
                     </div>
                     <div class="mt-1">
                         <label class="terms">
                             Al hacer clic en "Registrarme", aceptas nuestras Condiciones, la Política de datos y la
                             Política de Cookies.
                         </label>
+                    </div>
+                    <div class="input-group mb-2 mt-2 justify-content-center" *ngIf="mostrarError">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Usuario o Contraseña Incorrectos</span>
+                        </div>
                     </div>
                     <div class="mt-2">
                         <button [routerLink]="['/login']" type="button" class="btn btn-secondary">Volver</button>
