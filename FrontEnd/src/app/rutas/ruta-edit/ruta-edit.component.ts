@@ -15,6 +15,8 @@ export class RutaEditComponent implements OnInit {
 
   formGroup!: FormGroup;
 
+  src:string=""
+
   usuario: UsuarioInterfaz = {
     idUsuario: 1,
     nickname: "nickname",
@@ -64,19 +66,16 @@ export class RutaEditComponent implements OnInit {
     this.dbTopsterService.actualizarUsuario(this.usuario)
       .subscribe({
         next: (datos) => {
-          console.log(datos)
+          this.cargarPerfil()
         },
         error: (error) => {
           console.error({ error });
         }
       })
-    const ruta = ['/profile/'+this.nombreDeUsuario];
-    this.router.navigate(ruta);
   }
 
   cargarPerfil() {
-    //Solo redirecciona al perfil del usuario
-    const ruta = ['/profile/nombreUsuario'];
+    const ruta = ['/profile/',this.nombreDeUsuario];
     this.router.navigate(ruta);
   }
 
@@ -85,6 +84,7 @@ export class RutaEditComponent implements OnInit {
       .subscribe({
         next: (datos) => {
           this.usuario = Object.assign({}, datos[0]);
+          this.src = this.usuario.fotoDePerfil
           this.prepararFormulario()
         },
         error: (error) => {

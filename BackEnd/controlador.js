@@ -70,7 +70,7 @@ async function consultarUsuarioPorCorreo(correo){
 
 async function crearUsuario(usuario){
     let retorno={};
-    await db('post').insert({ FOTO_PERFIL: usuario.fotoDePerfil,
+    await db('usuario').insert({ FOTO_PERFIL: usuario.fotoDePerfil,
         NICKNAME:usuario.nickname,
         BIOGRAFIA:usuario.biografia,
         APELLIDOS_USUARIO:usuario.apellidos,
@@ -90,7 +90,8 @@ async function crearUsuario(usuario){
 
 async function actualizarUsuario(usuario){
     let retorno={};
-    await db('post') .where({ ID_USUARIO: usuario.idUsuario }).insert({ FOTO_PERFIL: usuario.fotoDePerfil,
+    await db('usuario') .where({ ID_USUARIO: usuario.idUsuario }).update({ 
+        FOTO_PERFIL: usuario.fotoDePerfil,
         NICKNAME:usuario.nickname,
         BIOGRAFIA:usuario.biografia,
         APELLIDOS_USUARIO:usuario.apellidos,
@@ -101,7 +102,6 @@ async function actualizarUsuario(usuario){
         GENERO:usuario.genero})
     .then((data) => {
         retorno = JSON.parse(JSON.stringify(data))
-        console.log(retorno)
     }).catch((err) => { console.log( err); throw err })
     .finally(() => {
     });

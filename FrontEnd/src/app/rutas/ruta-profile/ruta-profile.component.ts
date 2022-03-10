@@ -55,9 +55,8 @@ export class RutaProfileComponent implements OnInit {
   obtenerPerfilUsuario(){
     this.dbTopsterService.consultarUsuariosPorNombre(this.nombreDeUsuario)
     .subscribe({
-      next: (datos) => {
+      next: (datos) => { 
         this.usuario = Object.assign({},datos[0]);
-        console.log(datos[0])
       },
       error: (error) => {
         console.error({error});

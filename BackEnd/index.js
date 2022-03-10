@@ -136,7 +136,10 @@ app.put('/usuario/', (req, res) => {
         datosUsuario.clave = req.body.clave
         datosUsuario.fechaDeNacimiento = req.body.fechaDeNacimiento
         datosUsuario.genero = req.body.genero
-        controlador.actualizarUsuario(datosUsuario)
+        controlador.actualizarUsuario(datosUsuario).then(
+            (data) => {
+                res.json(data);
+            })
     } catch (e) {
         res.json(
             {
