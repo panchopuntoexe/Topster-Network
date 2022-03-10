@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ComentarioInterfaz } from 'src/app/servicios/interfaces/ComentarioInterfaz';
+import { PostInterfaz } from 'src/app/servicios/interfaces/PostInterfaz';
+import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 
 @Component({
   selector: 'app-posts',
@@ -9,22 +12,26 @@ import { Component, OnInit } from '@angular/core';
 
 export class PostsComponent implements OnInit {
 
-  arregloPosts = [
-    {
-      fotoPerfil: 'https://realestatemarket.com.mx/images/influencers/mark.jpg',
-      nombreUsuario: 'Mark Zuckerberg',
-      imagenPost: 'https://i.redd.it/x7nxdaef5eg21.jpg',
-      descripcionPost: 'Hello Everybody',
-      fechaPost: '21/12/2021',
-    },
-    {
-      fotoPerfil: 'https://yt3.ggpht.com/gCzmAWJBMGq8oWajAUs6UVzw1V0I2WSRYOv-nTsmmW9WK384gh9nJm1BVnfAmGqRYKjDytAcTw=s900-c-k-c0x00ffffff-no-rj',
-      nombreUsuario: 'Bad Bunny',
-      imagenPost: 'https://pbs.twimg.com/media/FJ4hkE4X0AAe61Q?format=jpg&name=large',
-      descripcionPost: 'Se viene el mejor tour del f*cking mundo',
-      fechaPost: '16/11/2022',
-    },
-  ]
+  @Input()
+  arregloPosts:PostInterfaz[]=[]
+
+  comentariosDePost:ComentarioInterfaz[]=[]
+
+  getUsuario(idUsuario:number):UsuarioInterfaz{
+    
+    return {
+      idUsuario: 1,
+      nickname: "nickname",
+      biografia: "biografia",
+      apellidos: "apellidos",
+      nombres: "nombres",
+      correo: "correo",
+      clave: "clave",
+      fechaDeNacimiento: "06/07/1999",
+      genero: "Hombre",
+      fotoDePerfil: ""
+    }
+  }
 
   constructor() { }
 

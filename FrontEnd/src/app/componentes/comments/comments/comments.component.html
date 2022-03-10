@@ -2,10 +2,10 @@
 <div style="border-bottom: 1px solid rgba(0, 0, 0, 0.125);">
     <div *ngFor="let comments of arregloComentarios; let i = index">
         <div class="d-flex justify-content-between">
-            <p class="card-title-comment" style="margin-bottom: 0px;">{{comments.usuarioComentario}}</p>
-            <p class="comment-date" style="margin-bottom: 0px;">{{comments.fechaComentario}}</p>
+            <p class="card-title-comment" style="margin-bottom: 0px;">{{obtenerNombreDeUsuario(arregloComentarios[i].idUsuario)}}</p>
+            <p class="comment-date" style="margin-bottom: 0px;">{{arregloComentarios[i].fechaComentario}}</p>
         </div>
-        <p class="card-text-comment">{{comments.descripcionComentario}}</p>
+        <p class="card-text-comment">{{arregloComentarios[i].descripcionComentario}}</p>
         <hr>
     </div>
 </div>

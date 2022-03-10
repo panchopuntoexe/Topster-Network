@@ -1,7 +1,7 @@
 export interface ComentarioInterfaz {
-    idComentario:null,
-    idPost:null,
-    idUsuario:null,
-    descripcionComentario:null,
-    fechaComentario:null
+    idComentario:number,
+    idPost:number,
+    idUsuario:number,
+    descripcionComentario:string,
+    fechaComentario:string
 }

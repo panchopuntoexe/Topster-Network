@@ -2,11 +2,11 @@
     <div class="card mt-4 mb-3">
         <div class="card-header">
             <!-- Foto del Usuario-->
-            <img src="{{post.fotoPerfil}}" height="35" width="35" style="border-radius: 50%;">
-            {{post.nombreUsuario}}
+            <img src="{{getUsuario(arregloPosts[i].idUsuario).fotoDePerfil}}" height="35" width="35" style="border-radius: 50%;">
+            {{getUsuario(arregloPosts[i].idUsuario).nickname}}
         </div>
         <!-- Imagen del Post -->
-        <img class="card-img-top" src="{{post.imagenPost}}" alt="Card image cap">
+        <img class="card-img-top" src="{{arregloPosts[i].foto}}" alt="Card image cap">
         <div class="card-body-post">
             <div class="navbar-nav-reactions">
                 <a class="nav-item nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -39,18 +39,18 @@
                     </svg></a>
             </div>
             <!-- Descripción del Post -->
-            <p class="card-text mt-1" style="margin-bottom: 4px;">{{post.descripcionPost}}
+            <p class="card-text mt-1" style="margin-bottom: 4px;">{{arregloPosts[i].descripcion}}
             </p>
             <!-- Fecha del Post -->
             <div class="post-date mb-1">
-                {{post.fechaPost}}
+                {{arregloPosts[i].fecha}}
             </div>
 
             <!-- Comentarios del Post -->
             <div class="card-comments">
                 <h6 class="card-header-comment">Comentarios</h6>
                 <div class="card-body">
-                    <app-comments> </app-comments>
+                    <app-comments [arregloComentarios]="comentariosDePost"> </app-comments>
                 </div>
             </div>
         </div>

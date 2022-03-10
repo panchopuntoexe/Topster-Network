@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
+import { PostInterfaz } from 'src/app/servicios/interfaces/PostInterfaz';
 import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 
 @Component({
@@ -11,6 +12,8 @@ import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 export class RutaProfileComponent implements OnInit {
 
   nombreDeUsuario:string=""
+  postsDeUsuario:PostInterfaz[]=[]
+  
   usuario:UsuarioInterfaz = {
     idUsuario: 1,
     nickname: "nickname",
@@ -50,7 +53,7 @@ export class RutaProfileComponent implements OnInit {
 
   obtenerPosts(){
     //Se cargan los post realizados por el usuario
-    
+
   }
 
   obtenerPerfilUsuario(){

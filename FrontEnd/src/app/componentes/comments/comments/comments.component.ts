@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ComentarioInterfaz } from 'src/app/servicios/interfaces/ComentarioInterfaz';
 
 @Component({
   selector: 'app-comments',
@@ -7,23 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentsComponent implements OnInit {
 
-  arregloComentarios = [
-    {
-      usuarioComentario: 'el_dios_del_perreito',
-      descripcionComentario: 'Brah... ',
-      fechaComentario: '24/12/2021'
-    },
-    {
-      usuarioComentario: 'comic.ec',
-      descripcionComentario: 'Bombardeen Guayakill ',
-      fechaComentario: '26/12/2021'
-    },
-    {
-      usuarioComentario: 'fannumerounodebillieeilish',
-      descripcionComentario: "Why you don't get some bit**** for yourself?",
-      fechaComentario: '31/12/2021'
-    },
-  ]
+  @Input()
+  arregloComentarios:ComentarioInterfaz[]=[]
+
+  obtenerNombreDeUsuario(idUsuario:number):string{
+    return "BBBBRAJ"
+  }
 
   constructor() { }
 
