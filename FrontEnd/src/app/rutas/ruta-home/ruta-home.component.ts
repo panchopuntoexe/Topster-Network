@@ -12,7 +12,9 @@ export class RutaHomeComponent implements OnInit {
   constructor(
     private readonly dbTopsterService: DbtopsterService,
     private readonly router: Router,
-  ) { }
+  ) { 
+    console.log(localStorage.getItem('nombreDeUsuario'))
+  }
 
   posts={}
 

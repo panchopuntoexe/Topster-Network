@@ -47,6 +47,8 @@ export class RutaLoginComponent implements OnInit {
 
     // }
 
+    localStorage.setItem('nombreDeUsuario', "panchpuntoexe");
+
   }
 
 }
