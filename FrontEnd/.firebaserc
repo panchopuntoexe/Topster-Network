@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "topsternetwork": {
+      "hosting": {
+        "test": [
+          "topsternetwork"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "topsternetwork"
+  }
+}

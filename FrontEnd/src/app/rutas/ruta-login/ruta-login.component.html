@@ -13,14 +13,12 @@
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input type="text" name="" class="form-control input_user" value="" placeholder="Email">
+                        <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" type="text" name="usuario" class="form-control input_user" value="" placeholder="Email">
                     </div>
                     <label>Contraseña:</label>
                     <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <!--<div class="input-group-text">@</div>-->
-                        </div>
-                        <input type="password" name="" class="form-control input_pass" value=""
+
+                        <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" name="" class="form-control input_pass" value=""
                             placeholder="Contraseña">
                     </div>
                     <div class="form-group">

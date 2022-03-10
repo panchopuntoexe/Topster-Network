@@ -55,6 +55,19 @@ async function consultarUsuarioPorNombre(nicknameUsuario){
     return arrayDeObjectosAUsuarios(retorno)
 }
 
+async function consultarUsuarioPorCorreo(correo){
+    let retorno={};
+    await db.from('usuario').select("*").whereILike('CORREO', '%'+correo+'%')
+    .then((data) => {
+        //retorno = Object.assign({},data)
+        retorno = JSON.parse(JSON.stringify(data))
+    }).catch((err) => { console.log( err); throw err })
+    .finally(() => {
+         
+    });
+    return arrayDeObjectosAUsuarios(retorno)
+}
+
 async function crearUsuario(usuario){
     let retorno={};
     await db('post').insert({ FOTO_PERFIL: usuario.fotoDePerfil,
@@ -291,7 +304,7 @@ comentario.idUsuario=2*/
 
 module.exports = {
     db,
-    consultarUsuarioPorId,consultarUsuarios,consultarUsuarioPorNombre,crearUsuario,actualizarUsuario,
+    consultarUsuarioPorId,consultarUsuarios,consultarUsuarioPorNombre, consultarUsuarioPorCorreo, crearUsuario,actualizarUsuario,
     consultarPosts,consultarPostsPorUsuarioId,crearPost,
     consultarComentariosPorPostId,crearComentario,
     consultarReaccionesPorPostId,eliminarReaccion,crearReaccion,
