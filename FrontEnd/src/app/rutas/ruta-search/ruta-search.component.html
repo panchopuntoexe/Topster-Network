@@ -3,7 +3,7 @@
     <div class="container-fluid mx-5">
 
         <div class="col-3">
-            <a class="navbar-brand " href='/home/nombreUsuario'>
+            <a class="navbar-brand " href='/home/'>
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png"
                     width="35" height="35" class="d-inline-block align-top">
                 Topster
@@ -76,7 +76,8 @@
         <h6>Buscar Usuario:</h6>
         <div class="row">
             <div [formGroup]="formGroup" *ngIf="formGroup" class="col-md-10" style="align-self: center">
-                <input class="form-control mr-sm-2" formControlName="nombreABuscar" id="nombreABuscar" type="search" placeholder="Buscar" aria-label="Search">
+                <input class="form-control mr-sm-2" formControlName="nombreABuscar" 
+                        id="nombreABuscar" type="search" placeholder="Buscar" aria-label="Search">
             </div>
             <div class="col-md-2" style="align-self: center">
                 <button (click)="buscarUsuario()" type="button" class="btn btn-secondary" style="padding: 5px 7px">

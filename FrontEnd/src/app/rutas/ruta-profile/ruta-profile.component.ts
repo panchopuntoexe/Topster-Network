@@ -13,6 +13,7 @@ export class RutaProfileComponent implements OnInit {
 
   nombreDeUsuario:string=""
   postsDeUsuario:PostInterfaz[]=[]
+  esUsuarioLogueado:Boolean=false;
   
   usuario:UsuarioInterfaz = {
     idUsuario: 1,
@@ -42,18 +43,31 @@ export class RutaProfileComponent implements OnInit {
             const nombre = parametrosDeRuta['nombreUsuario'];
             this.nombreDeUsuario = nombre as string;
             this.obtenerPerfilUsuario()
+            this.obtenerPosts()
           }
         }
       )
+
+    this.esUsuarioLogueado = (localStorage.getItem('nombreDeUsuario')==this.nombreDeUsuario) ? true:false
   }
 
   seguirUsuario(){
     //Añadir un Usuario más a la lista de seguidos
+
   }
 
   obtenerPosts(){
     //Se cargan los post realizados por el usuario
-
+    this.dbTopsterService.consultarPostsPorUsuarioId(this.usuario.idUsuario)
+    .subscribe({
+      next: (datos) => { 
+        this.postsDeUsuario = Object.assign(this.postsDeUsuario,datos);
+        console.log(this.postsDeUsuario)
+      },
+      error: (error) => {
+        console.error({error});
+      }
+    })
   }
 
   obtenerPerfilUsuario(){
