@@ -98,6 +98,7 @@ app.post('/usuario/', (req, res) => {
         datosUsuario.idUsuario = req.body.idUsuario
         datosUsuario.fotoDePerfil = req.body.fotoDePerfil
         datosUsuario.biografia = req.body.biografia
+        datosUsuario.nickname = req.body.nickname
         datosUsuario.apellidos = req.body.apellidos
         datosUsuario.nombres = req.body.nombres
         datosUsuario.correo = req.body.correo

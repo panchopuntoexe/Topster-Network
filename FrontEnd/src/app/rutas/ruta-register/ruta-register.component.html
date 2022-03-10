@@ -21,6 +21,12 @@
                         </div>
                         <input formControlName="apellidos" type="text" name="" class="form-control input_user" value="" placeholder="Apellidos">
                     </div>
+                    <label>Nickname:</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                        </div>
+                        <input formControlName="nickname" type="text" name="" class="form-control input_user" value="" placeholder="Nickname">
+                    </div>
                     <label>Correo Electrónico:</label>
                     <div class="input-group mb-3">
                         <div class="input-group-append">
@@ -38,7 +44,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                         </div>
-                        <input formControlName="nacimiento" type="date" name="" class="form-control input_user" value="" placeholder="Fecha">
+                        <input formControlName="fechaDeNacimiento" type="date" name="" class="form-control input_user" value="" placeholder="Fecha">
                     </div>
 
                     <label>Género:</label>
@@ -55,7 +61,7 @@
                     </div>
                     <div class="input-group mb-2 mt-2 justify-content-center" *ngIf="mostrarError">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Usuario o Contraseña Incorrectos</span>
+                            <span class="input-group-text" id="basic-addon1">Campos Incompletos</span>
                         </div>
                     </div>
                     <div class="mt-2">

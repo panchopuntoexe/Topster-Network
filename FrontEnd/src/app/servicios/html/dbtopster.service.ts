@@ -65,9 +65,9 @@ export class DbtopsterService {
       )
   }
 
-  crearUsuario(usuario:UsuarioInterfaz) {
+  crearUsuario(usuario:UsuarioInterfaz){
     const url = environment.url + '/usuario/'
-    this.httpClient
+    return this.httpClient
       .post(url,usuario)
       .pipe(
         map(

@@ -1,6 +1,5 @@
 const usuario = {
     idUsuario:null,
-    
     fotoDePerfil:null,
     nickname:null,
     biografia:null,
