@@ -236,7 +236,7 @@ async function consultarTipoDeReaccion(idTipoDeReaccion) {
     return arrayDeObjectosATipoDeReaccion(retorno);
 }
 
-//quién le sigue al usuario ID_USUARIO?
+//a quién sigue de usuario ID
 async function consultarSeguimientoDeUsuarioId(idUsuario) {
     let retorno = {};
     await db.from('seguimiento').select("*").where('ID_USUARIO', idUsuario)
@@ -250,7 +250,7 @@ async function consultarSeguimientoDeUsuarioId(idUsuario) {
     return arrayDeObjectosASeguimientos(retorno);
 }
 
-//a quién sigue de usuario ID
+//quién le sigue al usuario ID_USUARIO?
 async function consultarSeguidoresDeUsuarioId(idUsuario) {
     let retorno = {};
     await db.from('seguimiento').select("*").where('USU_ID_USUARIO', idUsuario)
@@ -281,8 +281,8 @@ async function eliminarSeguimiento(idRelacion) {
 async function crearSeguimiento(seguimiento) {
     let retorno = {};
     await db('seguimiento').insert({
-        ID_USUARIO: seguimiento.idUsuarioASeguir,
-        USU_ID_USUARIO: seguimiento.idUsuarioSeguidor,
+        ID_USUARIO: seguimiento.idUsuarioSeguidor,
+        USU_ID_USUARIO: seguimiento.idUsuarioASeguir,
         FECHA_RELACION: tomarFechaDeHoy()
     })
         .then((data) => {

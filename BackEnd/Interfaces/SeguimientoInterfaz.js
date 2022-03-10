@@ -1,8 +1,8 @@
 let seguimiento = {
     idSeguimiento:null,
+    idUsuarioSeguidor:null,
 
     idUsuarioASeguir:null,
-    idUsuarioSeguidor:null,
     fechaRelacion:null
 }
 

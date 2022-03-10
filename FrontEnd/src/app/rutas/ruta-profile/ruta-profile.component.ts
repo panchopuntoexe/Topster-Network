@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
 import { PostInterfaz } from 'src/app/servicios/interfaces/PostInterfaz';
+import { SeguimientoInterfaz } from 'src/app/servicios/interfaces/SeguimientoInterfaz';
 import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 
 @Component({
@@ -11,11 +12,14 @@ import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 })
 export class RutaProfileComponent implements OnInit {
 
-  nombreDeUsuario:string=""
-  postsDeUsuario:PostInterfaz[]=[]
-  esUsuarioLogueado:Boolean=false;
-  
-  usuario:UsuarioInterfaz = {
+  nombreDeUsuario: string = ""
+  postsDeUsuario: PostInterfaz[] = []
+  esUsuarioLogueado: Boolean = false;
+
+  textoDeSeguir: String = "Seguir";
+  estaSiguiendo: Boolean = false;
+
+  usuario: UsuarioInterfaz = {
     idUsuario: 1,
     nickname: "nickname",
     biografia: "biografia",
@@ -27,6 +31,19 @@ export class RutaProfileComponent implements OnInit {
     genero: "Hombre",
     fotoDePerfil: ""
   }
+
+  usuarioLogueado: UsuarioInterfaz = {
+    idUsuario: 1,
+    nickname: "nickname",
+    biografia: "biografia",
+    apellidos: "apellidos",
+    nombres: "nombres",
+    correo: "correo",
+    clave: "clave",
+    fechaDeNacimiento: "06/07/1999",
+    genero: "Hombre",
+    fotoDePerfil: ""
+  };
 
   constructor(
     private readonly dbTopsterService: DbtopsterService,
@@ -48,43 +65,126 @@ export class RutaProfileComponent implements OnInit {
         }
       )
 
-    this.esUsuarioLogueado = (localStorage.getItem('nombreDeUsuario')==this.nombreDeUsuario) ? true:false
+    this.esUsuarioLogueado = (localStorage.getItem('nombreDeUsuario') == this.nombreDeUsuario) ? true : false
+    this.obtenerUsuarioLogueado()
+    this.verificarSeguimiento()
   }
 
-  seguirUsuario(){
-    //Añadir un Usuario más a la lista de seguidos
-
+  verificarSeguimiento() {
+    this.dbTopsterService.consultarSeguimientodeUsuarioId(this.usuarioLogueado.idUsuario)
+      .subscribe({
+        next: (datos) => {
+          console.log(datos)
+          if (datos != null) {
+            datos.forEach(value => {
+              if (this.usuario.idUsuario == value.idUsuarioSeguidor) {
+                this.estaSiguiendo = true
+              }
+            })
+          }
+          this.estaSiguiendo ? this.textoDeSeguir = "Dejar de seguir" : this.textoDeSeguir = "Seguir"
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
   }
 
-  obtenerPosts(){
+
+
+  seguirUsuario() {
+    if (this.estaSiguiendo) {
+      this.dbTopsterService.consultarSeguimientodeUsuarioId(this.usuarioLogueado.idUsuario)
+      .subscribe({
+        next: (datos) => {
+          if (datos != null) {
+            datos.forEach(value => {
+              if (this.usuario.idUsuario == value.idUsuarioSeguidor) {
+                this.dbTopsterService.eliminarSeguimiento(value.idSeguimiento)
+                  .subscribe({
+                    next: (datos) => {
+                      this.estaSiguiendo=false
+                      this.verificarSeguimiento()
+                    },
+                    error: (error) => {
+                      console.error({ error });
+                    }
+                  })
+              }
+            })
+          }
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
+      
+    }
+    else {
+      var nuevoSeguimiento: SeguimientoInterfaz = {
+        idSeguimiento: 1,
+        idUsuarioASeguir: this.usuario.idUsuario,
+        idUsuarioSeguidor: this.usuarioLogueado.idUsuario,
+        fechaRelacion: ""
+      }
+
+      this.dbTopsterService.crearSeguimiento(nuevoSeguimiento)
+        .subscribe({
+          next: (datos) => {
+            this.verificarSeguimiento()
+          },
+          error: (error) => {
+            console.error({ error });
+          }
+        })
+    }
+  }
+
+
+  obtenerPosts() {
     //Se cargan los post realizados por el usuario
     this.dbTopsterService.consultarPostsPorUsuarioId(this.usuario.idUsuario)
-    .subscribe({
-      next: (datos) => { 
-        this.postsDeUsuario = Object.assign(this.postsDeUsuario,datos);
-        console.log(this.postsDeUsuario)
-      },
-      error: (error) => {
-        console.error({error});
-      }
-    })
+      .subscribe({
+        next: (datos) => {
+          this.postsDeUsuario = Object.assign(this.postsDeUsuario, datos);
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
   }
 
-  obtenerPerfilUsuario(){
+  obtenerPerfilUsuario() {
     this.dbTopsterService.consultarUsuariosPorNombre(this.nombreDeUsuario)
-    .subscribe({
-      next: (datos) => { 
-        this.usuario = Object.assign({},datos[0]);
-      },
-      error: (error) => {
-        console.error({error});
-      }
-    })
+      .subscribe({
+        next: (datos) => {
+          this.usuario = Object.assign({}, datos[0]);
+          this.obtenerPosts()
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
   }
 
-  editarPerfil(){
+  obtenerUsuarioLogueado() {
+    var nombreDeUsuarioLogueado: string = ""
+    nombreDeUsuarioLogueado = localStorage.getItem('nombreDeUsuario') + ""
+
+    this.dbTopsterService.consultarUsuariosPorNombre(nombreDeUsuarioLogueado)
+      .subscribe({
+        next: (datos) => {
+          this.usuarioLogueado = Object.assign({}, datos[0]);
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
+  }
+
+  editarPerfil() {
     //Solo redirecciona a editar perfil del usuario
-    const ruta = ['/edit/'+this.nombreDeUsuario];
+    const ruta = ['/edit/' + this.nombreDeUsuario];
     this.router.navigate(ruta);
   }
 

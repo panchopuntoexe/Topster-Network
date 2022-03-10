@@ -89,12 +89,13 @@
             </div>
             <div>
                 <ul class="d-flex flex-row m-0 justify-content-evenly" style="list-style: none">
-                    <li>20K seguidores</li>
-                    <li>10 seguidos</li>
+                    <!--li>20K seguidores</li>
+                    <li>10 seguidos</li-->
                 </ul>
             </div>
             <div class="d-flex flex-row m-0 justify-content-evenly">
-                <button (click)="seguirUsuario()" class=" btn btn-warning" type="button">Seguir</button>
+                <button *ngIf="!esUsuarioLogueado" (click)="seguirUsuario()" 
+                    class=" btn btn-warning" type="button">{{textoDeSeguir}}</button>
             </div>
         </div>
     </div>
