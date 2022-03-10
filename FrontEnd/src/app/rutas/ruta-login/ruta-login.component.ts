@@ -12,9 +12,11 @@ import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 export class RutaLoginComponent implements OnInit {
 
   loginGroup!: FormGroup;
-  username = '';
+  correo = '';
   password = '';
-  usuario ?: UsuarioInterfaz;
+  username = '';
+  usuario: UsuarioInterfaz[] = []
+  mostrarError = false;
 
   constructor(
     private readonly dbTopsterService: DbtopsterService,
@@ -25,29 +27,35 @@ export class RutaLoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ingresar(){
+  ingresar() {
     //Verificaciones
-    console.log(this.username)
-    this.dbTopsterService
-    .consultarUsuariosPorCorreo(this.username)
-    .subscribe({
-      next: (datos) => {
-        console.log(datos);
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-    const usuario = this.dbTopsterService.consultarUsuariosPorCorreo(this.username);
-    console.log(usuario);
-    // if(){
-      const ruta = ['/home', this.username];
-      this.router.navigate(ruta);
-    // } else {
-
-    // }
-
-    localStorage.setItem('nombreDeUsuario', "panchpuntoexe");
+    if (this.correo != '') {
+      this.dbTopsterService
+        .consultarUsuariosPorCorreo(this.correo)
+        .subscribe({
+          next: (datos) => {
+            this.usuario = datos;
+            if (this.usuario.length != 0) {
+              this.username = this.usuario[0].nickname;
+              if (this.password == this.usuario[0].clave) {
+                // Envío de usuario logeado
+                localStorage.setItem('nombreDeUsuario', this.username);
+                const ruta = ['/home', this.username];
+                this.router.navigate(ruta);
+              } else {
+                this.mostrarError = !this.mostrarError;
+              }
+            } else {
+              this.mostrarError = !this.mostrarError;
+            }
+          },
+          error: (error) => {
+            console.log(error)
+          }
+        })
+    } else {
+      this.mostrarError = !this.mostrarError;
+    }
 
   }
 
