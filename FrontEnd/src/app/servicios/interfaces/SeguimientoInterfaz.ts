@@ -1,6 +1,6 @@
 export interface SeguimientoInterfaz {
-    idSeguimiento:null,
-    idUsuarioASeguir:null,
-    idUsuarioSeguidor:null,
-    fechaRelacion:null
+    idSeguimiento:number,
+    idUsuarioASeguir:number,
+    idUsuarioSeguidor:number,
+    fechaRelacion:string
 }

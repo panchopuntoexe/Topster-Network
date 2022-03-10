@@ -50,6 +50,7 @@ export class RutaProfileComponent implements OnInit {
 
   obtenerPosts(){
     //Se cargan los post realizados por el usuario
+    
   }
 
   obtenerPerfilUsuario(){

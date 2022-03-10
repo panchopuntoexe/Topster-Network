@@ -1,4 +1,4 @@
 export interface TipoDeReaccionInterfaz {
-    idReaccion:null,
-    nombreReaccion:null
+    idReaccion:number,
+    nombreReaccion:string
 }
