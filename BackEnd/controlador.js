@@ -131,7 +131,6 @@ async function consultarPostsPorUsuarioId(idUsuario) {
             retorno = JSON.parse(JSON.stringify(data))
         }).catch((err) => { console.log(err); throw err })
         .finally(() => {
-
         });
     return arrayDeObjectosAPosts(retorno);
 }
@@ -355,8 +354,8 @@ function arrayDeObjectosAPosts(arrayDeObjectosSQL) {
     let listaDePosts = []
     let postAuxiliar = postInterfaz.post
     arrayDeObjectosSQL.forEach(element => {
-        postAuxiliar.idPost = element.ID_USUARIO
-        postAuxiliar.idUsuario = element.FOTO_PERFIL
+        postAuxiliar.idPost = element.ID_POST
+        postAuxiliar.idUsuario = element.ID_USUARIO
         postAuxiliar.foto = element.FOTO_POST
         postAuxiliar.descripcion = element.DESCRIPCION_POST
         postAuxiliar.fecha = element.FECHA_POST
