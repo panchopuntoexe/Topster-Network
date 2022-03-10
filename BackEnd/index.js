@@ -320,7 +320,7 @@ app.get('/tipoDeReaccion/:idTipo', (req, res) => {
     }
 })
 
-//quién le sigue al usuario ID_USUARIO?
+//a quién sigue de usuario ID
 //http://localhost:3000/seguimiento/usuarioid
 app.get('/seguimiento/:usuarioid', (req, res) => {
     let usuarioid = req.params.usuarioid;
@@ -339,7 +339,7 @@ app.get('/seguimiento/:usuarioid', (req, res) => {
     }
 })
 
-//a quién sigue de usuario ID
+//quién le sigue al usuario ID_USUARIO?
 //http://localhost:3000/seguidores/usuarioid
 app.get('/seguidores/:usuarioid', (req, res) => {
     let usuarioid = req.params.usuarioid;

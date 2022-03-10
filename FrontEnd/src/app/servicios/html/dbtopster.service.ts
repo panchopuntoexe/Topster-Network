@@ -171,6 +171,7 @@ export class DbtopsterService {
         )
       )
   }
+  
 //quién le sigue al usuario ID_USUARIO?
   consultarSeguimientodeUsuarioId(userId: number): Observable<SeguimientoInterfaz[]> {
     const url = environment.url + '/seguimiento/' + userId
@@ -195,10 +196,15 @@ export class DbtopsterService {
       )
   }
 
-  eliminarSeguimiento(idRelacion: number) {
-    const url = environment.url + '/usuario/' + idRelacion
+  eliminarSeguimiento(idRelacion: number):Observable<string> {
+    const url = environment.url + '/seguimiento/' + idRelacion
     return this.httpClient
       .delete(url)
+      .pipe(
+        map(
+          (resultadoEnDatos) => resultadoEnDatos as string
+        )
+      )
   }
 
   crearSeguimiento(seguimiento: SeguimientoInterfaz) {
