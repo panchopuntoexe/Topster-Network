@@ -54,6 +54,17 @@ export class DbtopsterService {
       )
   }
 
+  consultarUsuariosPorCorreo(correo: string): Observable<UsuarioInterfaz[]> {
+    const url = environment.url + '/user/' + correo
+    return this.httpClient
+      .get(url)
+      .pipe(
+        map(
+          (resultadoEnDatos) => resultadoEnDatos as UsuarioInterfaz[]
+        )
+      )
+  }
+
   crearUsuario(usuario:UsuarioInterfaz) {
     const url = environment.url + '/usuario/'
     this.httpClient

@@ -33,7 +33,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [  ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -102,6 +102,16 @@
               "src/styles.scss"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "test:build:production",
+            "firebaseProject": "topsternetwork",
+            "firebaseHostingSite": "topsternetwork"
           }
         }
       }

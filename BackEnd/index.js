@@ -73,6 +73,23 @@ app.get('/usuarios/:nickname', (req, res) => {
     }
 })
 
+app.get('/user/:correo', (req, res) => {
+
+    let correo = req.params.correo;
+    try {
+        controlador.consultarUsuarioPorCorreo(correo).then(
+            (data) => {
+                res.json(data);
+            })
+    } catch (e) {
+        res.json(
+            {
+                "error": "Error al mostrar usuarios"
+            }
+        );
+    }
+})
+
 //http://localhost:3000/usuario/
 app.post('/usuario/', (req, res) => {
 
