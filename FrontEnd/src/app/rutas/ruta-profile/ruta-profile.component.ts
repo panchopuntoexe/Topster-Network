@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
+import { ComentarioInterfaz } from 'src/app/servicios/interfaces/ComentarioInterfaz';
 import { PostInterfaz } from 'src/app/servicios/interfaces/PostInterfaz';
 import { SeguimientoInterfaz } from 'src/app/servicios/interfaces/SeguimientoInterfaz';
 import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
@@ -13,7 +14,16 @@ import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 export class RutaProfileComponent implements OnInit {
 
   nombreDeUsuario: string = ""
-  postsDeUsuario: PostInterfaz[] = []
+  postsDeUsuario:{
+    posts:PostInterfaz[],
+    usuarios:UsuarioInterfaz[],
+    comentarios:ComentarioInterfaz[][]
+  }={
+      posts:[],
+      usuarios:[],
+      comentarios:[]
+    }
+
   esUsuarioLogueado: Boolean = false;
 
   textoDeSeguir: String = "Seguir";
@@ -143,7 +153,8 @@ export class RutaProfileComponent implements OnInit {
     this.dbTopsterService.consultarPostsPorUsuarioId(this.usuario.idUsuario)
       .subscribe({
         next: (datos) => {
-          this.postsDeUsuario = Object.assign(this.postsDeUsuario, datos);
+          this.postsDeUsuario.posts = Object.assign([], datos);
+          this.getUsuariosDePosts()
         },
         error: (error) => {
           console.error({ error });
@@ -183,6 +194,39 @@ export class RutaProfileComponent implements OnInit {
     //Solo redirecciona a editar perfil del usuario
     const ruta = ['/edit/' + this.nombreDeUsuario];
     this.router.navigate(ruta);
+  }
+
+  getUsuariosDePosts(){
+    let aux : PostInterfaz[]=Object.assign([],this.postsDeUsuario.posts)
+    aux.forEach(values=>{
+      this.dbTopsterService.consultarUsuariosPorId(values.idUsuario)
+      .subscribe({
+        next: (datos) => {
+          this.postsDeUsuario.usuarios.push(datos[0]);
+          this.getComentariosDePosts()
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
+    })
+    
+  }
+
+  getComentariosDePosts(){
+    let aux : PostInterfaz[]=Object.assign([],this.postsDeUsuario.posts)
+    aux.forEach(values=>{
+      this.dbTopsterService.consultarComentariosPorPostId(values.idPost)
+      .subscribe({
+        next: (datos) => {
+          this.postsDeUsuario.comentarios.push(datos);
+        },
+        error: (error) => {
+          console.error({ error });
+        }
+      })
+    })
+    
   }
 
 }

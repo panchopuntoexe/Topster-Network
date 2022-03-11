@@ -155,6 +155,6 @@ export class RutaEditComponent implements OnInit {
     const file = this.selectedFiles?.item(0);
     this.selectedFiles = undefined;
     this.currentFileUpload = new FileUpload(file!);
-    this.src = this.uploadService.pushFileToStorage(this.currentFileUpload)
+    this.src = "https://i.pinimg.com/originals/5c/d3/57/5cd3570c93ae3dc5bd2cdb299d02115b.gif"
   }
 }

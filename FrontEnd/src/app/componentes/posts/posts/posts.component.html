@@ -1,12 +1,12 @@
-<div *ngFor="let post of arregloPosts; let i = index">
+<div *ngFor="let post of objectKeys(arregloPosts.posts); let i = index">
     <div class="card mt-4 mb-3">
         <div class="card-header">
             <!-- Foto del Usuario-->
-            <img src="{{arregloUsuariosDePosts[i].fotoDePerfil}}" height="35" width="35" style="border-radius: 50%;">
-            {{arregloUsuariosDePosts[i].nickname}}
+            <img src="{{arregloPosts.usuarios[i].fotoDePerfil}}" height="35" width="35" style="border-radius: 50%;">
+            {{arregloPosts.usuarios[i].nickname}}
         </div>
         <!-- Imagen del Post -->
-        <img class="card-img-top" src="{{arregloPosts[i].foto}}" alt="Card image cap">
+        <img class="card-img-top" src="{{arregloPosts.posts[i].foto}}" alt="Card image cap">
         <div class="card-body-post">
             <div class="navbar-nav-reactions">
                 <a class="nav-item nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -39,18 +39,18 @@
                     </svg></a>
             </div>
             <!-- Descripción del Post -->
-            <p class="card-text mt-1" style="margin-bottom: 4px;">{{arregloPosts[i].descripcion}}
+            <p class="card-text mt-1" style="margin-bottom: 4px;">{{arregloPosts.posts[i].descripcion}}
             </p>
             <!-- Fecha del Post -->
             <div class="post-date mb-1">
-                {{arregloPosts[i].fecha}}
+                {{arregloPosts.posts[i].fecha}}
             </div>
 
             <!-- Comentarios del Post -->
             <div class="card-comments">
                 <h6 class="card-header-comment">Comentarios</h6>
                 <div class="card-body">
-                    <app-comments [arregloComentarios]="comentariosDePost"> </app-comments>
+                    <app-comments [arregloComentarios]="arregloPosts.comentarios[i]"> </app-comments>
                 </div>
             </div>
         </div>

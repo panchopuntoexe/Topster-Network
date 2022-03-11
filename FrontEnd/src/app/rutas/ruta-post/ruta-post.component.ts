@@ -15,7 +15,9 @@ import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 export class RutaPostComponent implements OnInit {
 
   nombreDeUsuario: string = "";
+  
   esUsuarioLogueado: Boolean = false;
+
   usuario: UsuarioInterfaz = {
     idUsuario: 1,
     nickname: "nickname",
