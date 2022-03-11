@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { finalize, Observable } from 'rxjs';
+import { finalize, Observable, Subscription } from 'rxjs';
 import { FileUpload } from 'src/app/models/file-upload';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { UploadTaskSnapshot } from '@angular/fire/compat/storage/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,13 @@ export class FileUploadService {
   
   private basePath = '/uploads';
 
+  urlRecienteDeSubida:string=""
+
   constructor(
     private db: AngularFireDatabase,
     private storage: AngularFireStorage) { }
 
-  pushFileToStorage(fileUpload: FileUpload): Observable<number|undefined> {
+  pushFileToStorage(fileUpload: FileUpload): string {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -23,12 +26,23 @@ export class FileUploadService {
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           fileUpload.url = downloadURL;
+          this.urlRecienteDeSubida = downloadURL
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
         });
       })
-    ).subscribe();
-    return uploadTask.percentageChanges();
+      
+    ).subscribe({
+      next: (data) => {
+        return this.urlRecienteDeSubida
+      },
+      error: (error) => {
+        console.error({ error });
+        return " "
+      }
+    })
+    
+    return this.urlRecienteDeSubida
   }
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);

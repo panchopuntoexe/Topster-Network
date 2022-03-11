@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileUpload } from 'src/app/models/file-upload';
+import { FileUploadService } from 'src/app/servicios/firebase/file-upload.service';
 import { DbtopsterService } from 'src/app/servicios/html/dbtopster.service';
 import { UsuarioInterfaz } from 'src/app/servicios/interfaces/UsuarioInterfaz';
 
@@ -30,7 +32,13 @@ export class RutaEditComponent implements OnInit {
     fotoDePerfil: ""
   }
 
-  constructor(
+  selectedFiles?: FileList;
+
+  currentFileUpload?: FileUpload;
+
+  percentage: number=0;
+
+  constructor(private uploadService: FileUploadService,
     private readonly dbTopsterService: DbtopsterService,
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
@@ -59,9 +67,11 @@ export class RutaEditComponent implements OnInit {
     this.usuario.nombres = this.formGroup?.get('nombre')?.value
     this.usuario.apellidos = this.formGroup?.get('apellido')?.value
     this.usuario.genero = this.formGroup?.get('genero')?.value
+    this.usuario.fotoDePerfil = this.uploadService.urlRecienteDeSubida
   }
 
   actualizarPerfil() {
+    
     this.prepararObjeto()
     this.dbTopsterService.actualizarUsuario(this.usuario)
       .subscribe({
@@ -134,5 +144,17 @@ export class RutaEditComponent implements OnInit {
 
     });
 
+  }
+
+  selectFile(event:any): void {
+    this.selectedFiles = event.target.files;
+    this.upload()
+  }
+
+  upload(): void {
+    const file = this.selectedFiles?.item(0);
+    this.selectedFiles = undefined;
+    this.currentFileUpload = new FileUpload(file!);
+    this.src = this.uploadService.pushFileToStorage(this.currentFileUpload)
   }
 }

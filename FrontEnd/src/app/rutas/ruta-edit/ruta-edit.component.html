@@ -85,7 +85,7 @@
             </div>
             <div class="d-flex flex-row m-0 justify-content-evenly">
                 <div class="file btn btn-lg btn-primary">
-                    <input type="file" class="uploadFile" name="filename">
+                    <input type="file" class="uploadFile" name="filename" (change)="selectFile($event)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                         class="bi bi-image" viewBox="0 0 16 16">
                         <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
@@ -250,7 +250,7 @@
     </div>
 
     <div class="d-flex flex-row m-0 justify-content-evenly" style="padding-bottom: 15px;">
-        <button (click)="cargarPerfil()" class=" btn btn-danger" type="button">Cancelar</button>
+        <button (click)="cargarPerfil()"  class=" btn btn-danger" type="button">Cancelar</button>
         <button (click)="actualizarPerfil()" class=" btn btn-warning" type="button">Actualizar</button>
     </div>
 
