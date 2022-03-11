@@ -14,6 +14,34 @@ export class RutaSearchComponent implements OnInit {
   formGroup!: FormGroup;
   arregloTarjetas:UsuarioInterfaz[]=[]
 
+  nombreDeUsuario: string = "";
+  esUsuarioLogueado: Boolean = false;
+  usuario: UsuarioInterfaz = {
+    idUsuario: 1,
+    nickname: "nickname",
+    biografia: "biografia",
+    apellidos: "apellidos",
+    nombres: "nombres",
+    correo: "correo",
+    clave: "clave",
+    fechaDeNacimiento: "06/07/1999",
+    genero: "Hombre",
+    fotoDePerfil: ""
+  }
+
+  usuarioLogueado: UsuarioInterfaz = {
+    idUsuario: 1,
+    nickname: "nickname",
+    biografia: "biografia",
+    apellidos: "apellidos",
+    nombres: "nombres",
+    correo: "correo",
+    clave: "clave",
+    fechaDeNacimiento: "06/07/1999",
+    genero: "Hombre",
+    fotoDePerfil: ""
+  };
+
   constructor(
     private readonly dbTopsterService: DbtopsterService,
     private readonly router: Router,

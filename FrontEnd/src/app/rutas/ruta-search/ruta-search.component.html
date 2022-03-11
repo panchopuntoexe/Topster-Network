@@ -3,11 +3,12 @@
     <div class="container-fluid mx-5">
 
         <div class="col-3">
-            <a class="navbar-brand " href='/home/'>
+            <a class="navbar-brand " href="/home/{{usuario.nickname}}">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png"
                     width="35" height="35" class="d-inline-block align-top">
                 Topster
             </a>
+
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +20,7 @@
                 <!-- ICONOS -->
                 <ul class="d-flex flex-row m-0 justify-content-evenly" style="list-style: none">
                     <li>
-                        <a class="nav-item nav-link " [routerLink]="['/home/nombreUsuario']">
+                        <a class="nav-item nav-link " href="/home/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-house-door" viewBox="0 0 16 16">
                                 <path
@@ -28,7 +29,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link" [routerLink]="['/post/nombreUsuario']">
+                        <a class="nav-item nav-link" href="/post/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-plus-square" viewBox="0 0 16 16">
                                 <path
@@ -39,7 +40,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link active" [routerLink]="['/profile/nombreUsuario']">
+                        <a class="nav-item nav-link active" href="/profile/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-person" viewBox="0 0 16 16">
                                 <path
@@ -48,7 +49,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link" [routerLink]="['/search/nombreUsuario']">
+                        <a class="nav-item nav-link" href="/search/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path

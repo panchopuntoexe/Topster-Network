@@ -3,7 +3,7 @@
     <div class="container-fluid mx-5">
 
         <div class="col-3">
-            <a class="navbar-brand " href='/home/nombreUsuario'>
+            <a class="navbar-brand " href="/home/{{usuario.nickname}}">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png"
                     width="35" height="35" class="d-inline-block align-top">
                 Topster
@@ -20,7 +20,7 @@
                 <!-- ICONOS -->
                 <ul class="d-flex flex-row m-0 justify-content-evenly" style="list-style: none">
                     <li>
-                        <a class="nav-item nav-link " [routerLink]="['/home/nombreUsuario']">
+                        <a class="nav-item nav-link " href="/home/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-house-door" viewBox="0 0 16 16">
                                 <path
@@ -29,7 +29,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link" [routerLink]="['/post/nombreUsuario']">
+                        <a class="nav-item nav-link" href="/post/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-plus-square" viewBox="0 0 16 16">
                                 <path
@@ -40,7 +40,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link active" [routerLink]="['/profile/nombreUsuario']">
+                        <a class="nav-item nav-link active" href="/profile/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-person" viewBox="0 0 16 16">
                                 <path
@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link" [routerLink]="['/search/nombreUsuario']">
+                        <a class="nav-item nav-link" href="/search/{{usuario.nickname}}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-search" viewBox="0 0 16 16">
                                 <path
@@ -76,13 +76,20 @@
     <div class="card mt-4 mb-4">
         <div class="card-header">
             <!-- Foto de Perfil -->
-            <img src="https://realestatemarket.com.mx/images/influencers/mark.jpg" height="35" width="35"
+            <img src="{{usuario.fotoDePerfil}}" height="35" width="35"
             style="border-radius: 50%;">
-            [nombreUsuario]
+            {{usuario.nickname}}
         </div>
         <div class="card-body">
-            <div class="input-group">
-                <textarea class="form-control" aria-label="With textarea" placeholder="Crea un post ;)"></textarea>
+            <form>
+                <div class="input-group">
+                    <textarea [(ngModel)]="descripcion" [ngModelOptions]="{standalone: true}" class="form-control" aria-label="With textarea" placeholder="Crea un post ;)"></textarea>
+                </div>
+            </form>
+            <div class="input-group mb-2 mt-2 justify-content-center" *ngIf="mostrarError">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="background-color: rgb(223, 41, 41)"id="basic-addon1">Error al intentar Postear</span>
+                </div>
             </div>
             <div class="container">
                 <div class="row justify-content-between">
@@ -95,7 +102,7 @@
                                     d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
                             </svg>
                             Subir Foto
-                            <input type="file" name="file" />
+                            <input type="file" class="uploadFile" name="filename" (change)="selectFile($event)">
                         </div>
                     </div>
                     <div class="col-2">

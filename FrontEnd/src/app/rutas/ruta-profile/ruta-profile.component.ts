@@ -60,11 +60,9 @@ export class RutaProfileComponent implements OnInit {
             const nombre = parametrosDeRuta['nombreUsuario'];
             this.nombreDeUsuario = nombre as string;
             this.obtenerPerfilUsuario()
-            // this.obtenerPosts()
           }
         }
       )
-
     this.esUsuarioLogueado = (localStorage.getItem('nombreDeUsuario') == this.nombreDeUsuario) ? true : false
     this.obtenerUsuarioLogueado()
     this.verificarSeguimiento()
