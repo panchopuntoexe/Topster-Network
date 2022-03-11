@@ -9,10 +9,12 @@
         <hr>
     </div>
 </div>
-<div class="input-group">
-    <textarea class="form-control" style="height: 40px;" aria-label="With textarea" placeholder="Añade un comentario...">
+<div class="input-group" [formGroup]="formGroup" *ngIf="formGroup">
+    <textarea formControlName="comentario" id="comentario" 
+    class="form-control" style="height: 40px;" aria-label="With textarea" 
+    placeholder="Añade un comentario...">
     </textarea>
-    <a class=" mt-2 btn btn-success ">
+    <a class=" mt-2 btn btn-success " (click)="aniadirComentario()">
         <div class='align-self-center'>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-send"
                 viewBox="0 0 16 16">

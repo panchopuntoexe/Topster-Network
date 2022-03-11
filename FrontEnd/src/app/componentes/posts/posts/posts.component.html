@@ -50,7 +50,8 @@
             <div class="card-comments">
                 <h6 class="card-header-comment">Comentarios</h6>
                 <div class="card-body">
-                    <app-comments [arregloComentarios]="arregloPosts.comentarios[i]"> </app-comments>
+                    <app-comments [arregloComentarios]="arregloPosts.comentarios[i]"
+                                    [idPost]="arregloPosts.posts[i].idPost"> </app-comments>
                 </div>
             </div>
         </div>
