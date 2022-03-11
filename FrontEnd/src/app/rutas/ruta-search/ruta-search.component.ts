@@ -50,6 +50,7 @@ export class RutaSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepararFormulario()
+    this.nombreDeUsuario = localStorage.getItem('nombreDeUsuario')+""
   }
 
   buscarUsuario(){

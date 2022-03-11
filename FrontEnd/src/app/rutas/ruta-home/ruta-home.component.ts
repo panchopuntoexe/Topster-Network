@@ -62,8 +62,11 @@ export class RutaHomeComponent implements OnInit {
       .subscribe(
         {
           next: (parametrosDeRuta) => {
+            //no hace nada porque le quite la ruta
+            /*
             const nombre = parametrosDeRuta['nombreUsuario'];
             this.nombreDeUsuario = nombre as string;
+            */
             this.obtenerPerfilUsuario()
           }
         }
@@ -88,7 +91,7 @@ export class RutaHomeComponent implements OnInit {
   }
 
   obtenerPerfilUsuario() {
-    this.dbTopsterService.consultarUsuariosPorNombre(this.nombreDeUsuario)
+    this.dbTopsterService.consultarUsuariosPorNombre(this.usuarioLogueado.nickname)
       .subscribe({
         next: (datos) => {
           this.usuario = Object.assign({}, datos[0]);

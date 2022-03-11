@@ -72,7 +72,6 @@ export class RutaProfileComponent implements OnInit {
     this.dbTopsterService.consultarSeguimientodeUsuarioId(this.usuarioLogueado.idUsuario)
       .subscribe({
         next: (datos) => {
-          console.log(datos)
           if (datos != null) {
             datos.forEach(value => {
               if (this.usuario.idUsuario == value.idUsuarioSeguidor) {

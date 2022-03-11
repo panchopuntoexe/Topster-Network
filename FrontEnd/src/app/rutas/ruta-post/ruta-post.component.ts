@@ -69,8 +69,11 @@ export class RutaPostComponent implements OnInit {
       .subscribe(
         {
           next: (parametrosDeRuta) => {
+            /*
             const nombre = parametrosDeRuta['nombreUsuario'];
             this.nombreDeUsuario = nombre as string;
+            */
+            this.nombreDeUsuario = localStorage.getItem('nombreDeUsuario')+""
             this.obtenerPerfilUsuario()
             this.idUsuario = this.obtenerIdUsuario()
           }

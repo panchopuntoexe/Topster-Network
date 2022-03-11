@@ -20,11 +20,11 @@ const routes: Routes = [
     component: RutaRegisterComponent
   },
   {
-    path: 'home/:nombreUsuario',
+    path: 'home',
     component: RutaHomeComponent 
   },
   {
-    path: 'search/:nombreUsuario',
+    path: 'search',
     component: RutaSearchComponent 
   },
   {
@@ -36,7 +36,7 @@ const routes: Routes = [
     component: RutaEditComponent
   },
   {
-    path: 'post/:nombreUsuario',
+    path: 'post',
     component: RutaPostComponent
   },
   {
