@@ -241,7 +241,6 @@ async function consultarSeguimientoDeUsuarioId(idUsuario) {
     let retorno = {};
     await db.from('seguimiento').select("*").where('ID_USUARIO', idUsuario)
         .then((data) => {
-            //retorno = Object.assign({},data)
             retorno = JSON.parse(JSON.stringify(data))
         }).catch((err) => { console.log(err); throw err })
         .finally(() => {
