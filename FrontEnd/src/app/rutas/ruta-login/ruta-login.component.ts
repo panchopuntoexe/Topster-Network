@@ -40,7 +40,7 @@ export class RutaLoginComponent implements OnInit {
               if (this.password == this.usuario[0].clave) {
                 // Envío de usuario logeado
                 localStorage.setItem('nombreDeUsuario', this.username);
-                const ruta = ['/home', this.username];
+                const ruta = ['/home'];
                 this.router.navigate(ruta);
               } else {
                 this.mostrarError = !this.mostrarError;
