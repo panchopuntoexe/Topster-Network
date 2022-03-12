@@ -184,7 +184,7 @@ async function crearComentario(comentario) {
 
 async function consultarReaccionesPorPostId(idPost) {
     let retorno = {};
-    await db.from('recciones').select("*").where('ID_POST', idPost)
+    await db.from('reacciones').select("*").where('ID_POST', idPost)
         .then((data) => {
             //retorno = Object.assign({},data)
             retorno = JSON.parse(JSON.stringify(data))

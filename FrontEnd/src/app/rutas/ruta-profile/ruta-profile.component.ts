@@ -17,11 +17,13 @@ export class RutaProfileComponent implements OnInit {
   postsDeUsuario:{
     posts:PostInterfaz[],
     usuarios:UsuarioInterfaz[],
-    comentarios:ComentarioInterfaz[][]
+    comentarios:ComentarioInterfaz[][],
+    reacciones: string[][]
   }={
       posts:[],
       usuarios:[],
-      comentarios:[]
+      comentarios:[],
+      reacciones:[]
     }
 
   esUsuarioLogueado: Boolean = false;

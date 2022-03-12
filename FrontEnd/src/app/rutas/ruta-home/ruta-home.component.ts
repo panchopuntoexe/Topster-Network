@@ -31,11 +31,13 @@ export class RutaHomeComponent implements OnInit {
   postsDeUsuario: {
     posts: PostInterfaz[],
     usuarios: UsuarioInterfaz[],
-    comentarios: ComentarioInterfaz[][]
+    comentarios: ComentarioInterfaz[][],
+    reacciones: string[][]
   } = {
       posts: [],
       usuarios: [],
-      comentarios: []
+      comentarios: [],
+      reacciones:[]
     };
 
   estaSiguiendo: Boolean = false;
@@ -139,6 +141,27 @@ export class RutaHomeComponent implements OnInit {
         .subscribe({
           next: (datos) => {
             this.postsDeUsuario.comentarios.push(datos);
+            this.getReaccionesDePosts()
+          },
+          error: (error) => {
+            console.error({ error });
+          }
+        })
+    })
+
+  }
+
+  getReaccionesDePosts() {
+    let aux: PostInterfaz[] = Object.assign([], this.postsDeUsuario.posts)
+    aux.forEach(values => {
+      this.dbTopsterService.consultarReaccionesPorPostId(values.idPost)
+        .subscribe({
+          next: (datos) => {
+            var auxReacciones:string[] = ["currentColor","currentColor","currentColor","currentColor","currentColor"]
+            datos.forEach((value,index)=>{
+              auxReacciones[value.idTipoDeReaccion] = "red"
+            })
+            this.postsDeUsuario.reacciones.push(auxReacciones);
           },
           error: (error) => {
             console.error({ error });
